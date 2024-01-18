@@ -19,13 +19,6 @@ function execute(msg, stats) {
             })
             break
     }
-    const btag = stats.basetag.findOne({ where: { name: ticktock }}).then((tag) => {
-        if (tag) {
-            msg.reply('```\n'+tag.get('content')+'``` '+`by ${tag.get('creator')}`)
-        } else {
-            msg.reply('Tag does not exist.')
-        }
-    }).catch(() => {})
 }
 module.exports = {
     name: 'get',
