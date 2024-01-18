@@ -399,5 +399,27 @@ vbclient.once(Events.ClientReady, c => {
     intstats.baseSerial.sync();
     console.log(`Ready! Logged in as ${c.user.tag}`);
 })
+client.on(Events.MessageReactionAdd, (msgr, user) => {
+    if (msgr.message.id == '1197369720274436096') {
+        if (msgr.id == '1192977053767700661') { // gokustare
+            msgr.guild.members.addRole({user: user.id, role: '1195425749692330034'})
+        } else if (msgr.id == '1191449291676467220') { // gojo
+            msgr.guild.members.addRole({user: user.id, role: '1196310700105138207'})
+        } else if (msgr.id == '1191710190643462144') { // oofy
+            msgr.guild.members.addRole({user: user.id, role: '1197366106369818754'})
+        }
+    }
+})
+client.on(Events.MessageReactionRemove, (msgr, user) => {
+    if (msgr.message.id == '1197369720274436096') {
+        if (msgr.id == '1192977053767700661') { // gokustare
+            msgr.guild.members.removeRole({user: user.id, role: '1195425749692330034'})
+        } else if (msgr.id == '1191449291676467220') { // gojo
+            msgr.guild.members.removeRole({user: user.id, role: '1196310700105138207'})
+        } else if (msgr.id == '1191710190643462144') { // oofy
+            msgr.guild.members.removeRole({user: user.id, role: '1197366106369818754'})
+        }
+    }
+})
 client.login(process.env.TOK);
 vbclient.login(process.env.VTOK)
