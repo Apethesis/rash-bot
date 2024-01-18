@@ -209,7 +209,7 @@ client.on(Events.MessageCreate, msg => {
         intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
             if (user) {
                 user.increment('cmsg').then((usr) => {
-                    console.log(`${msg.member.displayName}: ${iner1.cmsg}`)
+                    console.log(`${msg.member.displayName}: ${usr.cmsg}`)
                     if (usr.cmsg >= 15) {
                         usr.cmsg == 0
                         usr.save().then(() => {
