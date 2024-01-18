@@ -401,9 +401,9 @@ vbclient.once(Events.ClientReady, c => {
 })
 client.on(Events.MessageReactionAdd, async (msgr, user) => {
     console.log('AM I WORKING')
-    if (reaction.partial) {
+    if (msgr.partial) {
 		try {
-			await reaction.fetch();
+			await msgr.fetch();
 		} catch (error) {
 			console.error('Something went wrong when fetching the message:', error);
 			return;
@@ -422,9 +422,9 @@ client.on(Events.MessageReactionAdd, async (msgr, user) => {
 })
 client.on(Events.MessageReactionRemove, async (msgr, user) => {
     console.log('AM I WORKING')
-    if (reaction.partial) {
+    if (msgr.partial) {
 		try {
-			await reaction.fetch();
+			await msgr.fetch();
 		} catch (error) {
 			console.error('Something went wrong when fetching the message:', error);
 			return;
