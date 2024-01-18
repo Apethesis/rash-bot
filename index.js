@@ -410,11 +410,11 @@ client.on(Events.MessageReactionAdd, async (msgr, user) => {
 	}
     if (msgr.message.channel.id == '1194055629346705429') {
         if (msgr.emoji.id == '1192977053767700661') { // gokustare
-            msgr.guild.members.addRole({user: user.id, role: '1195425749692330034'})
+            msgr.emoji.guild.members.addRole({user: user.id, role: '1195425749692330034'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1191449291676467220') { // gojo
-            msgr.guild.members.addRole({user: user.id, role: '1196310700105138207'})
+            msgr.emoji.guild.members.addRole({user: user.id, role: '1196310700105138207'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1191710190643462144') { // oofy
-            msgr.guild.members.addRole({user: user.id, role: '1197366106369818754'})
+            msgr.emoji.guild.members.addRole({user: user.id, role: '1197366106369818754'}).catch((err) => { console.log(err); })
         }
     }
 })
@@ -429,11 +429,11 @@ client.on(Events.MessageReactionRemove, async (msgr, user) => {
 	}
     if (msgr.message.channel.id == '1194055629346705429') {
         if (msgr.emoji.id == '1192977053767700661') { // gokustare
-            msgr.guild.members.removeRole({user: user.id, role: '1195425749692330034'})
+            msgr.emoji.guild.members.removeRole({user: user.id, role: '1195425749692330034'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1191449291676467220') { // gojo
-            msgr.guild.members.removeRole({user: user.id, role: '1196310700105138207'})
+            msgr.emoji.guild.members.removeRole({user: user.id, role: '1196310700105138207'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1191710190643462144') { // oofy
-            msgr.guild.members.removeRole({user: user.id, role: '1197366106369818754'})
+            msgr.emoji.guild.members.removeRole({user: user.id, role: '1197366106369818754'}).catch((err) => { console.log(err); })
         }
     }
 })
