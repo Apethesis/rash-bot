@@ -212,7 +212,7 @@ client.on(Events.MessageCreate, msg => {
                 if (user.cmsg == 15) {
                     user.cmsg >= 0
                     user.exp = user.exp + getRandomInt(25, 67)
-                    if (exp >= (500 * (user.lv * 0.25))) {
+                    if (exp >= (500 * (1+(user.lv * 0.25)))) {
                         user.lv = user.lv + 1
                         if (user.lv == 20) {
                             msg.guild.members.addRole({user: msg.author.id, role: '1193707486931324938'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to blue.`) }).catch((err) => { console.log(err); })
