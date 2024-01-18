@@ -208,22 +208,28 @@ client.on(Events.MessageCreate, msg => {
     if (msg.author.id != '1177722822420877353') {
         intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
             if (user) {
-                user.cmsg = user.cmsg + 1 
-                console.log(`${msg.member.displayName}: ${user.cmsg}`)
-                if (user.cmsg >= 15) {
-                    user.cmsg == 0
-                    user.exp = user.exp + getRandomInt(25, 67)
-                    if (exp >= (500 * (1+(user.lv * 0.25)))) {
-                        user.lv = user.lv + 1
-                        if (user.lv == 20) {
-                            msg.guild.members.addRole({user: msg.author.id, role: '1193707486931324938'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to blue.`) }).catch((err) => { console.log(err); })
-                        } else if (user.lv == 50) {
-                            msg.guild.members.addRole({user: msg.author.id, role: '1193709708746424343'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to red.`) }).catch((err) => { console.log(err); })
-                        } else if (user.lv == 100) {
-                            msg.guild.members.addRole({user: msg.author.id, role: '1193709967228805222'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to purple.`) }).catch((err) => { console.log(err); })
-                        }
+                user.increment('cmsg').then((usr) => {
+                    console.log(`${msg.member.displayName}: ${iner1.cmsg}`)
+                    if (usr.cmsg >= 15) {
+                        usr.cmsg == 0
+                        usr.save().then(() => {
+                            usr.increment('exp',{ by: getRandomInt(25, 67) }).then((useer) => {
+                                if (useer.exp >= (500 * (1+(useer.lv * 0.25)))) {
+                                    useer.increment('lv').then((us) => {
+                                        if (us.lv == 20) {
+                                            msg.guild.members.addRole({user: msg.author.id, role: '1193707486931324938'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to blue.`) }).catch((err) => { console.log(err); })
+                                        } else if (us.lv == 50) {
+                                            msg.guild.members.addRole({user: msg.author.id, role: '1193709708746424343'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to red.`) }).catch((err) => { console.log(err); })
+                                        } else if (us.lv == 100) {
+                                            msg.guild.members.addRole({user: msg.author.id, role: '1193709967228805222'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to purple.`) }).catch((err) => { console.log(err); })
+                                        }
+                                    }).catch((err) => { console.log(err) })
+                                }
+                            }).catch((err) => { console.log(err) })
+                        }).catch((err) => { console.log(err) })
                     }
-                }
+                }).catch((err) => { console.log(err) })
+                user.save().catch((err) => { console.log(err) })
             } else {
                 intstats.baseUser.create({
                     id: msg.author.id,
