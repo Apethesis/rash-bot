@@ -7,7 +7,7 @@ function execute(msg, stats) {
         case 'stats':
             stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
                 if (user) {
-                    msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nTo next level: ${500 * ((1+(user.lv * 0.25))*user.lv)-user.exp} EXP`)
+                    msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nTo next level: ${500 * ((1+(user.lv * 0.1))*user.lv)-user.exp} EXP`)
                 } else {
                     stats.baseUser.create({
                         id: msg.author.id,
