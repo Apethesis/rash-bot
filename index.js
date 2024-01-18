@@ -399,7 +399,15 @@ vbclient.once(Events.ClientReady, c => {
     intstats.baseSerial.sync();
     console.log(`Ready! Logged in as ${c.user.tag}`);
 })
-client.on(Events.MessageReactionAdd, (msgr, user) => {
+client.on(Events.MessageReactionAdd, async (msgr, user) => {
+    if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error('Something went wrong when fetching the message:', error);
+			return;
+		}
+	}
     if (msgr.message.channel.id == '1194055629346705429') {
         if (msgr.id == '1192977053767700661') { // gokustare
             msgr.guild.members.addRole({user: user.id, role: '1195425749692330034'})
@@ -410,7 +418,15 @@ client.on(Events.MessageReactionAdd, (msgr, user) => {
         }
     }
 })
-client.on(Events.MessageReactionRemove, (msgr, user) => {
+client.on(Events.MessageReactionRemove, async (msgr, user) => {
+    if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error('Something went wrong when fetching the message:', error);
+			return;
+		}
+	}
     if (msgr.message.channel.id == '1194055629346705429') {
         if (msgr.id == '1192977053767700661') { // gokustare
             msgr.guild.members.removeRole({user: user.id, role: '1195425749692330034'})
