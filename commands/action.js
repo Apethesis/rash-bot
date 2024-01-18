@@ -11,11 +11,6 @@ function execute(msg, stats) {
     const num = prevtx[1].lastIndexOf(">");
     const action = prevtx[1].substring(num,0).toLowerCase()
     const args = msg.content.split(' ')
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
     if (msg.author.id == '1168868176189198418' || msg.member.roles.highest.id == '1192565756899102830') {
         switch (action) {
             case 'kick':
@@ -103,7 +98,7 @@ function execute(msg, stats) {
                                     msg.guild.members.ban(msg.author.id).then(() => {
                                         setTimeout(() => {
                                             msg.guild.bans.remove(msg.author.id).catch(() => {})
-                                        },getRandomInt(5*60*1000,10*60*1000))
+                                        },stats.getRandomInt(5*60*1000,10*60*1000))
                                     }).catch(() => {})
                                 },13*1000)
                             })
@@ -112,7 +107,7 @@ function execute(msg, stats) {
                                 msg.channel.send('https://tenor.com/view/sukuna-malevolent-shrine-shibuya-jujutsu-kaise-jjk-gif-17518408518425958955')
                                 setTimeout(() => {
                                     msg.guild.bans.remove(args[2].substring(2,args[2].length-1)).catch(() => {})
-                                },getRandomInt(5*60*1000,10*60*1000))
+                                },stats.getRandomInt(5*60*1000,10*60*1000))
                             }).catch(() => {
                                 msg.channel.send('Domain Expansion failed, either the specified user is too high rank, doesnt exist or is already in a domain.')
                                 failed = true
@@ -154,7 +149,7 @@ function execute(msg, stats) {
                 })
                 break
             case 'rng':
-                msg.reply(`${getRandomInt(args[1],args[2])}`)
+                msg.reply(`${stats.getRandomInt(args[1],args[2])}`)
                 break
             case 'wipe':
                 if (secure[args[1].substring(2,args[1].length-1)]) {

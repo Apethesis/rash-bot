@@ -156,9 +156,12 @@ const intstats = {
             primaryKey: true,
         },
         exp: DataTypes.BIGINT,
-        lv: DataTypes.BIGINT,
+        lv: {
+            type: DataTypes.BIGINT,
+            defaultValue: 1,
+        },
         cmsg: DataTypes.SMALLINT,
-        croles: DataTypes.ARRAY(DataTypes.STRING),
+       // croles: DataTypes.ARRAY(DataTypes.STRING),
     }),
     baseSerial: vdb.define('baseSerial', {
         code: {
@@ -168,7 +171,12 @@ const intstats = {
             primaryKey: true,
         },
         wep: DataTypes.STRING
-    })
+    }),
+    getRandomInt: function(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
@@ -197,13 +205,34 @@ client.on(Events.MessageCreate, msg => {
     if (msg.channel.id == '1196363461354070036' && !(msg.content == "https://tenor.com/view/toji-toji-fushiguro-jujutsu-kaisen-jujutsu-kaisen-season-2-jjk-gif-14137776531255548484" || msg.content == "toji fushigiro")) {
        msg.delete().catch((err) => { console.log(err) })
     }
-    // if (msg.author.id != '1177722822420877353' && msg.channelId == '1193553372075270165') {
-    //    if (msg.author.id == '1063086356391280740') {
-    //        msg.channel.send(`<@${msg.author.id}> hop on tsb`)
-    //    } else {
-    //        msg.channel.send(`<@${msg.author.id}> did you pray today`)
-    //    }
-    // }
+    if (msg.author.id != '1177722822420877353') {
+        intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+            if (user) {
+                user.cmsg = user.cmsg + 1 
+                if (user.cmsg == 15) {
+                    user.cmsg >= 0
+                    user.exp = user.exp + getRandomInt(25, 67)
+                    if (exp >= (500 * (user.lv * 0.25))) {
+                        user.lv = user.lv + 1
+                        if (user.lv == 20) {
+                            msg.guild.members.addRole({user: msg.author.id, role: '1193707486931324938'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to blue.`) }).catch((err) => { console.log(err); })
+                        } else if (user.lv == 50) {
+                            msg.guild.members.addRole({user: msg.author.id, role: '1193709708746424343'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to red.`) }).catch((err) => { console.log(err); })
+                        } else if (user.lv == 100) {
+                            msg.guild.members.addRole({user: msg.author.id, role: '1193709967228805222'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to purple.`) }).catch((err) => { console.log(err); })
+                        }
+                    }
+                }
+            } else {
+                intstats.baseUser.create({
+                    id: msg.author.id,
+                    exp: 1,
+                    lv: 1,
+                    cmsg: 0,
+                })
+            }
+        })
+    }
     if (msg.content.toLowerCase().includes("furryku") && (msg.content.toLowerCase().includes("bad") || msg.content.toLowerCase().includes("hate") || msg.content.toLowerCase().includes("mid") || msg.content.toLowerCase().includes("ass") || msg.content.toLowerCase().includes("trash")) && msg.channelId == '1188252794793238548') {
         msg.member.timeout(intstats.argtosec("5m")*1000)
     }
@@ -247,6 +276,8 @@ client.on(Events.MessageCreate, msg => {
         }
         if (msg.content.split(" ")[0].substring(0,7) == '>action') {
             command = commands.get('>action');
+        } else if (msg.content.split(" ")[0].substring(0,4) == '>get') {
+            command = commands.get('>get');
         } else if (msg.content.substring(0,1) == "\\") {
             command = commands.get('>tag')
         } else {
