@@ -209,8 +209,9 @@ client.on(Events.MessageCreate, msg => {
         intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
             if (user) {
                 user.cmsg = user.cmsg + 1 
-                if (user.cmsg == 15) {
-                    user.cmsg >= 0
+                console.log(`${msg.member.displayName}: ${user.cmsg}`)
+                if (user.cmsg >= 15) {
+                    user.cmsg == 0
                     user.exp = user.exp + getRandomInt(25, 67)
                     if (exp >= (500 * (1+(user.lv * 0.25)))) {
                         user.lv = user.lv + 1
