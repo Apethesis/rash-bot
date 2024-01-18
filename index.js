@@ -400,6 +400,7 @@ vbclient.once(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
 })
 client.on(Events.MessageReactionAdd, async (msgr, user) => {
+    console.log('AM I WORKING')
     if (reaction.partial) {
 		try {
 			await reaction.fetch();
@@ -409,6 +410,7 @@ client.on(Events.MessageReactionAdd, async (msgr, user) => {
 		}
 	}
     if (msgr.message.channel.id == '1194055629346705429') {
+        console.log('HERE I MIGHT BE?')
         if (msgr.id == '1192977053767700661') { // gokustare
             msgr.guild.members.addRole({user: user.id, role: '1195425749692330034'})
         } else if (msgr.id == '1191449291676467220') { // gojo
@@ -419,6 +421,7 @@ client.on(Events.MessageReactionAdd, async (msgr, user) => {
     }
 })
 client.on(Events.MessageReactionRemove, async (msgr, user) => {
+    console.log('AM I WORKING')
     if (reaction.partial) {
 		try {
 			await reaction.fetch();
@@ -428,6 +431,7 @@ client.on(Events.MessageReactionRemove, async (msgr, user) => {
 		}
 	}
     if (msgr.message.channel.id == '1194055629346705429') {
+        console.log('HERE I MIGHT BE?')
         if (msgr.id == '1192977053767700661') { // gokustare
             msgr.guild.members.removeRole({user: user.id, role: '1195425749692330034'})
         } else if (msgr.id == '1191449291676467220') { // gojo
