@@ -16,12 +16,12 @@ const vdb = new Sequelize('vdb','postgres','root', {
     logging: false,
 })
 const client = new Client({
-	intents: [GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+	intents: [GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
 });
 const vbclient = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-    partials: [Partials.Message, Partials.Channel],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions],
+    partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
 })
 const commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
