@@ -176,6 +176,12 @@ function execute(msg, stats) {
             case 'revive':
               msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: '1196190338797273108'})
               break
+            case 'stop':
+                if (msg.author.id == '1168868176189198418') {
+                    msg.reply('Stopping rash-bot...')
+                    process.exit(22)
+                }
+                break
         }
     }
 }
