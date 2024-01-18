@@ -20,8 +20,8 @@ const client = new Client({
 	partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
 });
 const vbclient = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions],
-    partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+    partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 })
 const commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
