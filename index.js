@@ -212,7 +212,7 @@ client.on(Events.MessageCreate, msg => {
                     console.log(`${msg.member.displayName}: ${usr.cmsg}`)
                     if (usr.cmsg >= 15) {
                         usr.cmsg == 0
-                        usr.save().then(() => {
+                        usr.decrement('cmsg', { by: usr.cmsg }).then(() => {
                             usr.increment('exp',{ by: intstats.getRandomInt(25, 128) }).then((useer) => {
                                 if (useer.exp >= (500 * (1+(useer.lv * 0.25)))) {
                                     useer.increment('lv').then((us) => {
