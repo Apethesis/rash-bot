@@ -214,7 +214,7 @@ client.on(Events.MessageCreate, msg => {
                         usr.cmsg == 0
                         usr.decrement('cmsg', { by: usr.cmsg }).then(() => {
                             usr.increment('exp',{ by: intstats.getRandomInt(25, 128) }).then((useer) => {
-                                if (useer.exp >= (500 * (1+(useer.lv * 0.25)))) {
+                                if (useer.exp >= ((500 * (1+(useer.lv * 0.25)))*useer.lv)) {
                                     useer.increment('lv').then((us) => {
                                         if (us.lv == 20) {
                                             msg.guild.members.addRole({user: msg.author.id, role: '1193707486931324938'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to blue.`) }).catch((err) => { console.log(err); })
