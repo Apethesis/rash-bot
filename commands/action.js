@@ -11,7 +11,14 @@ function execute(msg, stats) {
     const num = prevtx[1].lastIndexOf(">");
     const action = prevtx[1].substring(num,0).toLowerCase()
     const args = msg.content.split(' ')
-    if (msg.author.id == '1168868176189198418' || msg.member.roles.highest.id == '1192565756899102830' || msg.member.roles.highest.id == '1196755851613044777') {
+    const authorized = {
+        '1198041664804106250': true,
+        '1198046098703528106': true,
+        '1192565756899102830': true,
+        '1196898349798924439': true,
+        '1196755851613044777': true,
+    }
+    if (msg.author.id == '1168868176189198418' || authorized[msg.member.roles.highest.id]) {
         switch (action) {
             case 'kick':
                 if (secure[args[1].substring(2,args[1].length-1)]) {
