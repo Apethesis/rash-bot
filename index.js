@@ -5,6 +5,8 @@ require('dotenv').config();
 const fetch = require('node-fetch');
 const { spawn } = require('child_process');
 const {Sequelize, DataTypes, Op} = require('sequelize');
+const veilbot = false
+const testingmode = true
 const rshdb = new Sequelize('rshdb','postgres','root', {
     host: 'localhost',
     dialect: 'postgres',
@@ -19,10 +21,13 @@ const client = new Client({
 	intents: [GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 	partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.User],
 });
-const vbclient = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-    partials: [Partials.Message, Partials.Channel, Partials.Reaction],
-})
+let vbclient 
+if (veilbot) {
+    vbclient = new Client({
+        intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+        partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+    })
+}
 const commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -35,17 +40,22 @@ for (const file of commandFiles) {
     	console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
-const vbcommands = new Collection();
-const vbcommandsPath = path.join(__dirname, 'vbcommands');
-const vbcommandFiles = fs.readdirSync(vbcommandsPath).filter(file => file.endsWith('.js'));
-for (const file of vbcommandFiles) {
-	const filePath = path.join(vbcommandsPath, file);
-	const command = require(filePath);
-	if ('name' in command && 'execute' in command) {
-		vbcommands.set('>'+command.name, command); 
-	} else {
-    	console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-	}
+let vbcommands
+let vbcommandsPath
+let vbcommandFiles
+if (veilbot) {
+    vbcommands = new Collection();
+    vbcommandsPath = path.join(__dirname, 'vbcommands');
+    vbcommandFiles = fs.readdirSync(vbcommandsPath).filter(file => file.endsWith('.js'));
+    for (const file of vbcommandFiles) {
+        const filePath = path.join(vbcommandsPath, file);
+        const command = require(filePath);
+        if ('name' in command && 'execute' in command) {
+            vbcommands.set('>'+command.name, command); 
+        } else {
+            console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+        }
+    }
 }
 const intstats = {
     env: process.env,
@@ -300,28 +310,30 @@ client.on(Events.MessageCreate, msg => {
 		console.error(error);
 	}
 })  
-vbclient.on(Events.MessageCreate, msg => {
-    let command
-    let shortform = false
-    if (msg.content.substring(0,1) == "#" && intstats.baseSerial.findOne({where: { code: msg.content }})) {
-        command = vbcommands.get('>serial')
-        shortform = true
-    } else {
-        command = vbcommands.get(msg.content.split(" ")[0]);
-    }
-    if (!command) {
-		return;
-	}
-    try {
-        if (shortform) {
-            command.execute(msg, intstats, shortform)
+if (veilbot) {
+    vbclient.on(Events.MessageCreate, msg => {
+        let command
+        let shortform = false
+        if (msg.content.substring(0,1) == "#" && intstats.baseSerial.findOne({where: { code: msg.content }})) {
+            command = vbcommands.get('>serial')
+            shortform = true
         } else {
-		    command.execute(msg, intstats);
+            command = vbcommands.get(msg.content.split(" ")[0]);
         }
-	} catch (error) {
-		console.error(error);
-	}
-})
+        if (!command) {
+            return;
+        }
+        try {
+            if (shortform) {
+                command.execute(msg, intstats, shortform)
+            } else {
+                command.execute(msg, intstats);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    })
+}
 client.on(Events.MessageDelete, msg => {
     if (msg.author.id != '1177722822420877353') {
         intstats.prevdel = {
@@ -433,10 +445,12 @@ client.once(Events.ClientReady, c => {
         }
     }, 600000)
 });
-vbclient.once(Events.ClientReady, c => {
-    intstats.baseSerial.sync();
-    console.log(`Ready! Logged in as ${c.user.tag}`);
-})
+if (veilbot) {
+    vbclient.once(Events.ClientReady, c => {
+        intstats.baseSerial.sync();
+        console.log(`Ready! Logged in as ${c.user.tag}`);
+    })
+}
 client.on(Events.MessageReactionAdd, async (msgr, user) => {
     if (msgr.partial) {
 		try {
@@ -475,5 +489,5 @@ client.on(Events.MessageReactionRemove, async (msgr, user) => {
         }
     }
 })
-client.login(process.env.TOK);
-vbclient.login(process.env.VTOK)
+if (testingmode) { client.login(process.env.TTOK); } else { client.login(process.env.TOK); }
+if (veilbot) { vbclient.login(process.env.VTOK); }
