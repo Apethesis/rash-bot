@@ -11,7 +11,7 @@ function execute(msg, stats) {
     const num = prevtx[1].lastIndexOf(">");
     const action = prevtx[1].substring(num,0).toLowerCase()
     const args = msg.content.split(' ')
-    if (msg.author.id == '1168868176189198418' || msg.member.roles.highest.id == '1192565756899102830') {
+    if (msg.author.id == '1168868176189198418' || msg.member.roles.highest.id == '1192565756899102830' || msg.member.roles.highest.id == '1196755851613044777') {
         switch (action) {
             case 'kick':
                 if (secure[args[1].substring(2,args[1].length-1)]) {
