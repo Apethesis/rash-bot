@@ -400,8 +400,8 @@ client.on(Events.GuildMemberAdd, m => {
     }
 })
 client.once(Events.ClientReady, c => {
-    intstats.basetag.sync();
-    intstats.baseUser.sync();
+    intstats.basetag.sync({ alter: true });
+    intstats.baseUser.sync({ alter: true });
     fs.rm('./ytdltemp.webm', () => {}) 
 	console.log(`Ready! Logged in as ${c.user.tag}`);
     setInterval(() => {
