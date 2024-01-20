@@ -239,7 +239,7 @@ client.on(Events.MessageCreate, msg => {
                                         } else if (us.lv == 100) {
                                             msg.guild.members.addRole({user: msg.author.id, role: '1193709967228805222'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to purple.`) }).catch((err) => { console.log(err); })
                                         }
-                                        useer.rp = useer.rp + intstats.getRandomInt(20,500)
+                                        us.increment('rp',{ by: intstats.getRandomInt(20,500) })
                                     }).catch((err) => { console.log(err) })
                                 }
                             }).catch((err) => { console.log(err) })
