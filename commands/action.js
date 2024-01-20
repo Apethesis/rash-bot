@@ -216,11 +216,11 @@ function execute(msg, stats) {
                                 if (!args[2]) { args[2] == 'heads'; }
                                 if (coinflip > 5 && args[2].toLowerCase() == "heads") { // heads
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
-                                        msg.reply(`You won ${Math.round(Number(args[1])*2)}`)
+                                        msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
                                 } else if (coinflip < 5 && args[2].toLowerCase() == "tails") { // tails
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
-                                        msg.reply(`You won ${Math.round(Number(args[1])*2)}`)
+                                        msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
                                 } else {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
@@ -266,11 +266,11 @@ function execute(msg, stats) {
                                 if (!args[2]) { args[2] == 'heads'; }
                                 if (coinflip > 5 && args[2].toLowerCase() == "heads") { // heads
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
-                                        msg.reply(`You won ${Math.round(Number(args[1])*2)}`)
+                                        msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
                                 } else if (coinflip < 5 && args[2].toLowerCase() == "tails") { // tails
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
-                                        msg.reply(`You won ${Math.round(Number(args[1])*2)}`)
+                                        msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
                                 } else {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
