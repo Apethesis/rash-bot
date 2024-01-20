@@ -120,6 +120,8 @@ const intstats = {
         'stoen': 'stoen.mp4',
         'bigstoen': 'stoen.mp4',
         'futuretrunksguy': 'stoen.mp4',
+        'ragecombo': 'RageCombo.mp4',
+        'raaah': 'RageCombo.mp4',
     },
     secrettags: {
         'fluxison': 'fluxison.webm',
