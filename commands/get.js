@@ -33,6 +33,17 @@ function execute(msg, stats) {
                 })
             }
             break
+        case 'leaderboard':
+            stats.baseUser.findAll({ order: [stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC'] }).then((arr) => {
+                let strig = ''
+                for (let i in arr) {
+                    msg.guild.members.fetch(arr[i].id).then((usr) => {
+                        strig = strig+`${i}. ${usr.displayName} - ${arr[i].rp} R-Points\n`
+                    }).catch((err) => { console.log(err); })
+                }
+                msg.reply(strig)
+            }).catch((err) => { console.log(err); })
+
     }
 }
 module.exports = {

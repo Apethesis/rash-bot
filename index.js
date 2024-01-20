@@ -201,7 +201,8 @@ const intstats = {
         wep: DataTypes.STRING
     }),
     getRandomInt: randomInt,
-    curcd: {}
+    curcd: {},
+    rshdb: rshdb,
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
