@@ -117,6 +117,9 @@ const intstats = {
         'bootykisser': 'bootykisser.webm',
 	    'inkingmistake': 'inkingmistake.webm',
         'imyou': 'imyou.webm',
+        'stoen': 'stoen.mp4',
+        'bigstoen': 'stoen.mp4',
+        'futuretrunksguy': 'stoen.mp4',
     },
     secrettags: {
         'fluxison': 'fluxison.webm',
