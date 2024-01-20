@@ -7,6 +7,7 @@ const { spawn } = require('child_process');
 const {Sequelize, DataTypes, Op} = require('sequelize');
 const veilbot = false
 const testingmode = false
+const { randomInt } = require('crypto');
 const rshdb = new Sequelize('rshdb','postgres','root', {
     host: '127.0.0.1',
     dialect: 'postgres',
@@ -190,11 +191,7 @@ const intstats = {
         },
         wep: DataTypes.STRING
     }),
-    getRandomInt: function(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
+    getRandomInt: randomInt,
     curcd: {}
 }
 function relatisend(msg, tochannel) {
