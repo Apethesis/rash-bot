@@ -36,6 +36,7 @@ function execute(msg, stats) {
         case 'leaderboard':
             stats.baseUser.findAll({ 
                 attributes: ['id'],
+                include: [{attributes:[]}],
                 order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']],
                 limit: 10,
                 group: ['baseUser.id']
