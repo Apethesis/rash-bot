@@ -132,6 +132,10 @@ const intstats = {
         'onlittlecatfeet': 'olcf.ogg',
         'onlittlecatfeet2': 'olcfr.webm',
         'myburdenislight': 'mbil.ogg',
+        'gogeta4': 'GogetaSS4.mp4',
+        'vegito': 'VegitoSSB.mp4',
+        'gogetame': 'GogetaBlueME.mp4',
+        'gogetaffk': 'GogetaBlueFFK.mp4',
     },
     authroles: {
         '1161076090677243994': true,
