@@ -35,9 +35,10 @@ function execute(msg, stats) {
             break
         case 'leaderboard':
             stats.baseUser.findAll({ 
-                attributes: ['baseUser.id'],
+                attributes: ['id'],
                 order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']],
-                limit: 10
+                limit: 10,
+                group: ['baseUser.id']
             }).then((arr) => {
                 let strig = ''
                 for (let i in arr) {
