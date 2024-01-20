@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const { spawn } = require('child_process');
 const {Sequelize, DataTypes, Op} = require('sequelize');
 const veilbot = false
-const testingmode = true
+const testingmode = false
 const rshdb = new Sequelize('rshdb','postgres','root', {
     host: '127.0.0.1',
     dialect: 'postgres',
