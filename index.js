@@ -114,7 +114,8 @@ const intstats = {
         'lorenzo': 'lorenzo.webm',
         'bootylicker': 'bootykisser.webm',
         'bootykisser': 'bootykisser.webm',
-	'inkingmistake': 'inkingmistake.webm',
+	    'inkingmistake': 'inkingmistake.webm',
+        'imyou': 'imyou.webm',
     },
     secrettags: {
         'fluxison': 'fluxison.webm',
@@ -124,6 +125,9 @@ const intstats = {
         'gamingfan': 'truepec.mp4',
 	    'delirious': 'gojo.webm',
 	    'gojo2': 'gojo.webm',
+        'onlittlecatfeet': 'olcf.ogg',
+        'onlittlecatfeet2': 'olcfr.webm',
+        'myburdenislight': 'mbil.ogg',
     },
     authroles: {
         '1161076090677243994': true,
