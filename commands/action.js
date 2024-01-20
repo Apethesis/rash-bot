@@ -249,7 +249,7 @@ function execute(msg, stats) {
                             if (args[3].substring(args[3].length-1) == 'a') {
                                 usr[args[2]] = args[3].substring(0,args[3].length-1)
                             } else {
-                                usr[args[2]] = usr[args[2]] + args[3]
+                                usr[args[2]] = usr[args[2]] + Number(args[3])
                             }
                             usr.save();
                         }).catch((err) => { console.log(err); })

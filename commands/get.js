@@ -36,7 +36,7 @@ function execute(msg, stats) {
         case 'leaderboard':
             stats.baseUser.findAll({ 
                 attributes: ['id'],
-                order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']],
+                order: [sequelize.fn('max', sequelize.col('rp'))],
                 limit: 10,
                 group: ['baseUser.id']
             }).then((arr) => {
