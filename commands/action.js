@@ -214,11 +214,11 @@ function execute(msg, stats) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
-                                if (coinflip > 5 && args[2].toLowerCase() == "heads") { // heads
+                                if (coinflip >= 5 && args[2].toLowerCase() == "heads") { // heads
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                         msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
-                                } else if (coinflip < 5 && args[2].toLowerCase() == "tails") { // tails
+                                } else if (coinflip <= 5 && args[2].toLowerCase() == "tails") { // tails
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                         msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
@@ -232,6 +232,17 @@ function execute(msg, stats) {
                     }
                 })
                 break
+            case 'set':
+                if (msg.members.roles.highest.id == '1198041664804106250') {
+                    try {
+                        stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
+                            usr[args[2]] = usr[args[2]] + args[3]
+                            usr.save();
+                        }).catch((err) => { console.log(err); })
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
         }
     } else {
         switch (action) {
@@ -264,11 +275,11 @@ function execute(msg, stats) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
-                                if (coinflip > 5 && args[2].toLowerCase() == "heads") { // heads
+                                if (coinflip >= 5 && args[2].toLowerCase() == "heads") { // heads
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                         msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
-                                } else if (coinflip < 5 && args[2].toLowerCase() == "tails") { // tails
+                                } else if (coinflip <= 5 && args[2].toLowerCase() == "tails") { // tails
                                     user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                         msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                     })
