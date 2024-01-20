@@ -40,7 +40,7 @@ function execute(msg, stats) {
                 limit: 10,
                 group: ['baseUser.id']
             }).then((arr) => {
-                let strig = ''
+                let strig = 'Leaderboard:\n'
                 for (let i in arr) {
                     msg.guild.members.fetch(arr[i].id).then((usr) => {
                         strig = strig+`${i}. ${usr.displayName} - ${arr[i].rp} R-Points\n`
