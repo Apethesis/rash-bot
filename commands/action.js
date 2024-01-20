@@ -215,9 +215,9 @@ function execute(msg, stats) {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
-                                    const coinflip = stats.getRandomInt(1,10)
+                                    const coinflip = stats.getRandomInt(1,11)
                                     if (!args[2]) { args[2] = 'heads'; }
-                                    if (coinflip >= 5 && args[2].toLowerCase() == "heads") { // heads
+                                    if (coinflip >= 6 && args[2].toLowerCase() == "heads") { // heads
                                         user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                             msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                         })
@@ -291,9 +291,9 @@ function execute(msg, stats) {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
-                                    const coinflip = stats.getRandomInt(1,10)
+                                    const coinflip = stats.getRandomInt(1,11)
                                     if (!args[2]) { args[2] = 'heads'; }
-                                    if (coinflip >= 5 && args[2].toLowerCase() == "heads") { // heads
+                                    if (coinflip >= 6 && args[2].toLowerCase() == "heads") { // heads
                                         user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
                                             msg.reply(`You won ${Math.round(Number(args[1])*2)} R-Points.`)
                                         })
