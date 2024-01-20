@@ -5,18 +5,33 @@ function execute(msg, stats) {
     const args = msg.content.split(' ')
     switch (action) {
         case 'stats':
-            stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
-                if (user) {
-                    msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
-                } else {
-                    stats.baseUser.create({
-                        id: msg.author.id,
-                        exp: 1,
-                        lv: 1,
-                        cmsg: 0,
-                    })
-                }
-            })
+            if (args[1]) {
+                stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
+                    if (user) {
+                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
+                    } else {
+                        stats.baseUser.create({
+                            id: args[1].substring(2,args[1].length-1),
+                            exp: 1,
+                            lv: 1,
+                            cmsg: 0,
+                        })
+                    }
+                })
+            } else {
+                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+                    if (user) {
+                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
+                    } else {
+                        stats.baseUser.create({
+                            id: msg.author.id,
+                            exp: 1,
+                            lv: 1,
+                            cmsg: 0,
+                        })
+                    }
+                })
+            }
             break
     }
 }
