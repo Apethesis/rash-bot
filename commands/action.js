@@ -240,8 +240,8 @@ function execute(msg, stats) {
                 if (msg.member.roles.highest.id == '1198041664804106250') {
                     try {
                         stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
-                            if (args[3].substring(arg[3].length-1) == 'a') {
-                                usr[args[2]] = args[3]
+                            if (args[3].substring(args[3].length-1) == 'a') {
+                                usr[args[2]] = args[3].substring(0,args[3].length-1)
                             } else {
                                 usr[args[2]] = usr[args[2]] + args[3]
                             }
