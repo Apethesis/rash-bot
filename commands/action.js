@@ -42,7 +42,11 @@ function execute(msg, stats) {
                     })
                 } else {
                     msg.guild.members.ban(args[1].substring(2,args[1].length-1)).then(() => {
-                        msg.channel.send('https://tenor.com/view/gojo-satoru-gojo-hollow-purple-jujutsu-kaisen-blue-gif-16843591044568531318')
+                        if (msg.author.id == '556136950114025523') {
+                            msg.channel.send('https://tenor.com/view/gogeta-dbz-dragon-ball-gogeta-hollow-purple-hollow-purple-gif-3984268001698118622')
+                        } else {
+                            msg.channel.send('https://tenor.com/view/gojo-satoru-gojo-hollow-purple-jujutsu-kaisen-blue-gif-16843591044568531318')
+                        }
                     }).catch(() => {
                         msg.channel.send('Failed to ban, either the specified user is too high rank or doesnt exist.')
                     })
