@@ -175,6 +175,10 @@ const intstats = {
             defaultValue: 1,
         },
         cmsg: DataTypes.SMALLINT,
+        rp: {
+            type: DataTypes.BIGINT,
+            defaultValue: 20,
+        },
        // croles: DataTypes.ARRAY(DataTypes.STRING),
     }),
     baseSerial: vdb.define('baseSerial', {
@@ -237,6 +241,7 @@ client.on(Events.MessageCreate, msg => {
                                         } else if (us.lv == 100) {
                                             msg.guild.members.addRole({user: msg.author.id, role: '1193709967228805222'}).then(() => { msg.reply(`${msg.member.displayName} has leveled up to purple.`) }).catch((err) => { console.log(err); })
                                         }
+                                        useer.rp = useer.rp + intstats.getRandomInt(20,500)
                                     }).catch((err) => { console.log(err) })
                                 }
                             }).catch((err) => { console.log(err) })
@@ -249,6 +254,7 @@ client.on(Events.MessageCreate, msg => {
                     id: msg.author.id,
                     exp: 1,
                     lv: 1,
+                    rp: 20,
                     cmsg: 0,
                 })
             }
