@@ -267,7 +267,7 @@ function execute(msg, stats) {
             case 'give':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[1])) == 1) {
+                        if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[2])) == 1) {
                             stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                                 if (user) {
                                     usr.decrement('rp', { by: Math.round(Number(args[2])) }).then(() => {
@@ -277,7 +277,7 @@ function execute(msg, stats) {
                                     })
                                 }
                             })
-                        } if (Math.sign(Number(args[1])) == -1) {
+                        } else if (Math.sign(Number(args[1])) == -1) {
                             msg.reply('Cant give others negative amounts.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
