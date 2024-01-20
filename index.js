@@ -224,7 +224,7 @@ client.on(Events.MessageCreate, msg => {
     if (msg.channel.id == '1196363461354070036' && !(msg.content == "https://tenor.com/view/toji-toji-fushiguro-jujutsu-kaisen-jujutsu-kaisen-season-2-jjk-gif-14137776531255548484" || msg.content == "toji fushigiro")) {
        msg.delete().catch((err) => { console.log(err) })
     }
-    if (msg.author.id != '1177722822420877353') {
+    if (true) {
         intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
             if (user) {
                 user.increment('cmsg').then((usr) => {
