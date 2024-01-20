@@ -210,7 +210,7 @@ function execute(msg, stats) {
             case 'coinflip':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[1]))) {
+                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
@@ -226,6 +226,8 @@ function execute(msg, stats) {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
                                 }
                             })
+                        } else if (Math.round(Number(args[1])) == 0) {
+                            msg.reply('Cant coinflip 0 R-Points.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
@@ -272,7 +274,7 @@ function execute(msg, stats) {
             case 'coinflip':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[1]))) {
+                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
@@ -288,6 +290,8 @@ function execute(msg, stats) {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
                                 }
                             })
+                        } else if (Math.round(Number(args[1])) == 0) {
+                            msg.reply('Cant coinflip 0 R-Points.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
