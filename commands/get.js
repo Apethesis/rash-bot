@@ -34,7 +34,11 @@ function execute(msg, stats) {
             }
             break
         case 'leaderboard':
-            stats.baseUser.findAll({ order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']] }).then((arr) => {
+            stats.baseUser.findAll({ 
+                attributes: ['id'],
+                order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']],
+                limit: 10
+            }).then((arr) => {
                 let strig = ''
                 for (let i in arr) {
                     msg.guild.members.fetch(arr[i].id).then((usr) => {
