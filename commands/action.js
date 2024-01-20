@@ -233,7 +233,7 @@ function execute(msg, stats) {
                 })
                 break
             case 'set':
-                if (msg.members.roles.highest.id == '1198041664804106250') {
+                if (msg.member.roles.highest.id == '1198041664804106250') {
                     try {
                         stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
                             usr[args[2]] = usr[args[2]] + args[3]
@@ -243,6 +243,7 @@ function execute(msg, stats) {
                         console.log(error);
                     }
                 }
+                break
         }
     } else {
         switch (action) {
