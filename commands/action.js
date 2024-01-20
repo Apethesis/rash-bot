@@ -189,6 +189,12 @@ function execute(msg, stats) {
                 }
                 break
         }
+    } else {
+        switch (action) {
+            case 'rng':
+                msg.reply(`${stats.getRandomInt(args[1],args[2])}`)
+                break
+        }
     }
 }
 module.exports = {
