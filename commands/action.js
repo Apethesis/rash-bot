@@ -231,7 +231,7 @@ function execute(msg, stats) {
                                     stats.curcd[msg.author.id] = true
                                     setTimeout(function() {
                                         stats.curcd[msg.author.id] = false
-                                    },1000)
+                                    },2000)
                                 })
                             } else if (Math.round(Number(args[1])) == 0 || Math.sign(Number(args[1])) == -1) {
                                 msg.reply('Cant coinflip 0 or any negative numbers.')
@@ -307,7 +307,7 @@ function execute(msg, stats) {
                                     stats.curcd[msg.author.id] = true
                                     setTimeout(function() {
                                         stats.curcd[msg.author.id] = false
-                                    },1000)
+                                    },2000)
                                 })
                             } else if (Math.round(Number(args[1])) == 0 || Math.sign(Number(args[1])) == -1) {
                                 msg.reply('Cant coinflip 0 or any negative numbers.')
