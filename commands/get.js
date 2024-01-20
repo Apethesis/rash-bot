@@ -6,12 +6,12 @@ function execute(msg, stats) {
     switch (action) {
         case 'stats':
             if (args[1]) {
-                stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
+                stats.baseUser.findOne({ where: { uid: args[1].substring(2,args[1].length-1) }}).then((user) => {
                     if (user) {
                         msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
                     } else {
                         stats.baseUser.create({
-                            id: args[1].substring(2,args[1].length-1),
+                            uid: args[1].substring(2,args[1].length-1),
                             exp: 1,
                             lv: 1,
                             cmsg: 0,
@@ -19,12 +19,12 @@ function execute(msg, stats) {
                     }
                 })
             } else {
-                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+                stats.baseUser.findOne({ where: { uid: msg.author.id }}).then((user) => {
                     if (user) {
                         msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
                     } else {
                         stats.baseUser.create({
-                            id: msg.author.id,
+                            uid: msg.author.id,
                             exp: 1,
                             lv: 1,
                             cmsg: 0,
@@ -35,15 +35,12 @@ function execute(msg, stats) {
             break
         case 'leaderboard':
             stats.baseUser.findAll({ 
-                attributes: ['id'],
-                include: [{attributes:[]}],
                 order: [[stats.rshdb.fn('max',stats.rshdb.col('rp')), 'DESC']],
                 limit: 10,
-                group: ['baseUser.id']
             }).then((arr) => {
                 let strig = 'Leaderboard:\n'
                 for (let i in arr) {
-                    msg.guild.members.fetch(arr[i].id).then((usr) => {
+                    msg.guild.members.fetch(arr[i].uid).then((usr) => {
                         strig = strig+`${i}. ${usr.displayName} - ${arr[i].rp} R-Points\n`
                     }).catch((err) => { console.log(err); })
                 }

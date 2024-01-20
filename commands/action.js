@@ -189,10 +189,10 @@ function execute(msg, stats) {
                 }
                 break
             case 'give':
-                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
+                stats.baseUser.findOne({ where: { uid: msg.author.id }}).then((usr) => {
                     if (usr) {
                         if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[2])) == 1) {
-                            stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
+                            stats.baseUser.findOne({ where: { uid: args[1].substring(2,args[1].length-1) }}).then((user) => {
                                 if (user) {
                                     usr.decrement('rp', { by: Math.round(Number(args[2])) }).then(() => {
                                         user.increment('rp', { by: Math.round(Number(args[2])) }).then(() => {
@@ -211,7 +211,7 @@ function execute(msg, stats) {
                 break
             case 'coinflip':
                 if (!stats.curcd[msg.author.id]) {
-                    stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
+                    stats.baseUser.findOne({ where: { uid: msg.author.id }}).then((usr) => {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
@@ -245,7 +245,7 @@ function execute(msg, stats) {
             case 'set':
                 if (msg.member.roles.highest.id == '1198041664804106250') {
                     try {
-                        stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
+                        stats.baseUser.findOne({ where: { uid: args[1] }}).then((usr) => {
                             if (args[3].substring(args[3].length-1) == 'a') {
                                 usr[args[2]] = args[3].substring(0,args[3].length-1)
                             } else {
@@ -265,10 +265,10 @@ function execute(msg, stats) {
                 msg.reply(`${stats.getRandomInt(args[1],args[2])}`)
                 break
             case 'give':
-                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
+                stats.baseUser.findOne({ where: { uid: msg.author.id }}).then((usr) => {
                     if (usr) {
                         if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[2])) == 1) {
-                            stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
+                            stats.baseUser.findOne({ where: { uid: args[1].substring(2,args[1].length-1) }}).then((user) => {
                                 if (user) {
                                     usr.decrement('rp', { by: Math.round(Number(args[2])) }).then(() => {
                                         user.increment('rp', { by: Math.round(Number(args[2])) }).then(() => {
@@ -287,7 +287,7 @@ function execute(msg, stats) {
                 break
             case 'coinflip':
                 if (!stats.curcd[msg.author.id]) {
-                    stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
+                    stats.baseUser.findOne({ where: { uid: msg.author.id }}).then((usr) => {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {

@@ -173,11 +173,10 @@ const intstats = {
         return num
     },
     baseUser: rshdb.define('baseUser', {
-        id: {
+        uid: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            primaryKey: true,
         },
         exp: DataTypes.BIGINT,
         lv: {
@@ -232,7 +231,7 @@ client.on(Events.MessageCreate, msg => {
        msg.delete().catch((err) => { console.log(err) })
     }
     if (true) {
-        intstats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+        intstats.baseUser.findOne({ where: { uid: msg.author.id }}).then((user) => {
             if (user) {
                 user.increment('cmsg').then((usr) => {
                     console.log(`${msg.member.displayName}: ${usr.cmsg}`)
@@ -259,7 +258,7 @@ client.on(Events.MessageCreate, msg => {
                 user.save().catch((err) => { console.log(err) })
             } else {
                 intstats.baseUser.create({
-                    id: msg.author.id,
+                    uid: msg.author.id,
                     exp: 1,
                     lv: 1,
                     rp: 20,
