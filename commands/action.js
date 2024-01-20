@@ -191,16 +191,18 @@ function execute(msg, stats) {
             case 'give':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= args[2]) {
+                        if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[1])) == 1) {
                             stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                                 if (user) {
-                                    usr.decrement('rp', { by: Number(args[2]) }).then(() => {
-                                        user.increment('rp', { by: Number(args[2]) }).then(() => {
-                                            msg.reply(`Transferred ${args[2]} R-Points to ${args[1]}.`)
+                                    usr.decrement('rp', { by: Math.round(Number(args[2])) }).then(() => {
+                                        user.increment('rp', { by: Math.round(Number(args[2])) }).then(() => {
+                                            msg.reply(`Transferred ${Math.round(Number(args[2]))} R-Points to ${args[1]}.`)
                                         })
                                     })
                                 }
                             })
+                        } if (Math.sign(Number(args[1])) == -1) {
+                            msg.reply('Cant give others negative amounts.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
@@ -210,7 +212,7 @@ function execute(msg, stats) {
             case 'coinflip':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0) {
+                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
@@ -226,8 +228,8 @@ function execute(msg, stats) {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
                                 }
                             })
-                        } else if (Math.round(Number(args[1])) == 0) {
-                            msg.reply('Cant coinflip 0 R-Points.')
+                        } else if (Math.round(Number(args[1])) == 0 || Math.sign(Number(args[1])) == -1) {
+                            msg.reply('Cant coinflip 0 or any negative numbers.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
@@ -238,7 +240,11 @@ function execute(msg, stats) {
                 if (msg.member.roles.highest.id == '1198041664804106250') {
                     try {
                         stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
-                            usr[args[2]] = usr[args[2]] + args[3]
+                            if (args[3].substring(arg[3].length-1) == 'a') {
+                                usr[args[2]] = args[3]
+                            } else {
+                                usr[args[2]] = usr[args[2]] + args[3]
+                            }
                             usr.save();
                         }).catch((err) => { console.log(err); })
                     } catch (error) {
@@ -255,7 +261,7 @@ function execute(msg, stats) {
             case 'give':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[2]))) {
+                        if (usr.rp >= Math.round(Number(args[2])) && Math.sign(Number(args[1])) == 1) {
                             stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                                 if (user) {
                                     usr.decrement('rp', { by: Math.round(Number(args[2])) }).then(() => {
@@ -265,6 +271,8 @@ function execute(msg, stats) {
                                     })
                                 }
                             })
+                        } if (Math.sign(Number(args[1])) == -1) {
+                            msg.reply('Cant give others negative amounts.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
@@ -274,7 +282,7 @@ function execute(msg, stats) {
             case 'coinflip':
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                     if (usr) {
-                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0) {
+                        if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                             usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                 const coinflip = stats.getRandomInt(1,10)
                                 if (!args[2]) { args[2] == 'heads'; }
@@ -290,8 +298,8 @@ function execute(msg, stats) {
                                     msg.reply(`You lostttt <:damn:1191710236944367626>`)
                                 }
                             })
-                        } else if (Math.round(Number(args[1])) == 0) {
-                            msg.reply('Cant coinflip 0 R-Points.')
+                        } else if (Math.round(Number(args[1])) == 0 || Math.sign(Number(args[1])) == -1) {
+                            msg.reply('Cant coinflip 0 or any negative numbers.')
                         } else {
                             msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
                         }
