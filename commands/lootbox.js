@@ -56,7 +56,7 @@ function execute(msg, stats) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 150 })
                             } else {
-                                usr.titles.push(gain)
+                                usr.titles[usr.titles.length] = gain
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)')
                                 usr.save()
                             }
@@ -72,7 +72,7 @@ function execute(msg, stats) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 300 })
                             } else {
-                                usr.titles.push(gain)
+                                usr.titles[usr.titles.length] = gain
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)')
                                 usr.save()
                             }
