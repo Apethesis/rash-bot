@@ -123,6 +123,8 @@ function execute(msg, stats) {
                         user.increment('rp', {by: rare[tcontent+' '][3]})
                     })
                 }
+            } else if (args[1] == 'unequip') {
+                msg.member.setNickname(null)
             }
         }
     }).catch(() => {})
