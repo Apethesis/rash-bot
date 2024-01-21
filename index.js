@@ -210,9 +210,7 @@ const intstats = {
         mod: 0,
         multi: 1,
     },
-    clamp: function(n,m,mx) {
-       return Math.min(Math.max(n, m), mx)
-    },
+    clamp: (num, min, max) => Math.min(Math.max(num, min), max),
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
