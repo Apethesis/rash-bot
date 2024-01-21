@@ -69,7 +69,7 @@ function execute(msg, stats) {
                                 usr.titles = JSON.stringify(titles)
                                 usr.save()
                             }
-                        } else if (roll(1,50) == 50) {
+                        } else if (roll(1,25) == 25) {
                             let gain
                             const titles = JSON.parse(usr.titles)
                             for (i in rare) {
