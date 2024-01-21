@@ -104,9 +104,7 @@ function execute(msg, stats) {
                     } 
                 }
                 if (found) {
-                    msg.member.setNickname(tcontent+' '+msg.author.globalName).then(() => {
-                        msg.member.setNickname(null)
-                    })
+                    msg.member.setNickname(tcontent+' '+msg.author.globalName)
                 } else {
                     msg.reply('You dont own that title.')
                 }
