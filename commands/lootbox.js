@@ -85,14 +85,18 @@ function execute(msg, stats) {
                                     break
                                 } 
                             }
-                            if (has) {
-                                msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
-                                usr.increment('rp', { by: 300 })
+                            if (gain) {
+                                if (has) {
+                                    msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
+                                    usr.increment('rp', { by: 300 })
+                                } else {
+                                    titles[Object.keys(titles).length+1] = gain
+                                    msg.reply(`You found: `+'``'+gain+'`` (Rare)')
+                                    usr.titles = JSON.stringify(titles)
+                                    usr.save()
+                                }
                             } else {
-                                titles[Object.keys(titles).length+1] = gain
-                                msg.reply(`You found: `+'``'+gain+'`` (Rare)')
-                                usr.titles = JSON.stringify(titles)
-                                usr.save()
+                                msg.reply(`You found: Nothing! (boowomp)`)
                             }
                         } else {
                             msg.reply(`You found: Nothing! (boowomp)`)
