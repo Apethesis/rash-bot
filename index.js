@@ -203,9 +203,16 @@ const intstats = {
     curcd: {},
     rshdb: rshdb,
     chancetbl: {
-        'solstice': [99999,100000],
+        'solstice': [1,100000,85000],
     },
-    commonroles: {}
+    commonroles: {},
+    sessionstats: {
+        mod: 0,
+        multi: 1,
+    },
+    clamp: function(n,m,mx) {
+       return Math.min(Math.max(n, m), mx)
+    },
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {

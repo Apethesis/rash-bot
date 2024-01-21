@@ -215,7 +215,7 @@ function execute(msg, stats) {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
-                                    const coinflip = stats.getRandomInt(1,101)
+                                    const coinflip = stats.clamp((stats.getRandomInt(1,101)*stats.sessionstats.multi)+stats.sessionstats.mod)stats.getRandomInt(1,101)
                                     if (!args[2]) { args[2] = 'heads'; }
                                     if (coinflip >= 51 && args[2].toLowerCase() == "heads") { // heads
                                         user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
@@ -258,6 +258,15 @@ function execute(msg, stats) {
                     }
                 }
                 break
+            case 'session':
+                if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
+                    if (Number(args[2])) {
+                        stats.sessionstats[args[1]] = Number(args[2])
+                    } else {
+                        stats.sessionstats[args[1]] = args[2]
+                    }
+                    msg.reply(`Set session ${args[1]} to ${args[2]}`)
+                }
         }
     } else {
         switch (action) {
@@ -291,7 +300,7 @@ function execute(msg, stats) {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
-                                    const coinflip = stats.getRandomInt(1,101)
+                                    const coinflip = stats.clamp((stats.getRandomInt(1,101)*stats.sessionstats.multi)+stats.sessionstats.mod)
                                     if (!args[2]) { args[2] = 'heads'; }
                                     if (coinflip >= 51 && args[2].toLowerCase() == "heads") { // heads
                                         user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
