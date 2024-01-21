@@ -243,13 +243,13 @@ function execute(msg, stats) {
                 }
                 break
             case 'set':
-                if (msg.member.roles.highest.id == '1198041664804106250') {
+                if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
                     try {
                         stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
                             if (args[3].substring(args[3].length-1) == 'a') {
                                 usr[args[2]] = args[3].substring(0,args[3].length-1)
                             } else {
-                                usr.increment(usr[args[2]], { by: Number(args[3]) })
+                                usr.increment(args[2], { by: Number(args[3]) })
                             }
                             usr.save();
                         }).catch((err) => { console.log(err); })
