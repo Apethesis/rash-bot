@@ -97,6 +97,7 @@ function execute(msg, stats) {
                 console.log(tcontent+' ')
                 console.log(titles)
                 if (titles.includes(tcontent+' ')) {
+                    console.log("IS THIS EVEN RUNNING AAAAAAAAAAAAAAAA")
                     msg.member.setNickname(tcontent+' '+msg.author.globalName).then(() => {
                         msg.member.setNickname(null)
                     })
