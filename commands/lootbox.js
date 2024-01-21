@@ -136,7 +136,7 @@ function execute(msg, stats) {
                         break
                     } 
                 }
-                if (found)) {
+                if (found) {
                     otitles[titles.indexOf(tcontent+' ')] = null
                     user.titles = JSON.stringify(otitles)
                     msg.reply(`Sold for ${rare[tcontent+' '][3]} R-Points.`)
