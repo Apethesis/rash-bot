@@ -299,7 +299,7 @@ function execute(msg, stats) {
                 if (!stats.curcd[msg.author.id]) {
                     stats.baseUser.findOne({ where: { id: msg.author.id }}).then((usr) => {
                         if (usr) {
-                            if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
+                            if (Math.round(Number(args[1])) <= 100000 && usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
                                     const coinflip = stats.clamp((stats.getRandomInt(1,101)*stats.sessionstats.multi)+stats.sessionstats.mod,1,100)
                                     console.log(coinflip)
@@ -323,7 +323,7 @@ function execute(msg, stats) {
                             } else if (Math.round(Number(args[1])) == 0 || Math.sign(Number(args[1])) == -1) {
                                 msg.reply('Cant coinflip 0 or any negative numbers.')
                             } else {
-                                msg.reply(`Not a valid number, or you lack R-Points. (broke boy)`)
+                                msg.reply(`Not a valid number, too high of a number, or you lack R-Points. (broke boy)`)
                             }
                         }
                     })

@@ -93,10 +93,9 @@ function execute(msg, stats) {
                 }
                 msg.reply(stri)
             } else if (args[1] == 'equip') {
-                const titles = JSON.parse(user.titles)
+                const titles = Object.keys(JSON.parse(user.titles))
                 console.log(tcontent+' ')
                 console.log(titles)
-                console.log(`${msg.author.globalName}, ${msg.author.username}`)
                 if (titles.includes(tcontent+' ')) {
                     if ((tcontent+' '+msg.author.globalName).length > 32) {
                         msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
@@ -105,6 +104,17 @@ function execute(msg, stats) {
                     }
                 } else {
                     msg.reply('You dont own that title.')
+                }
+            } else if (args[1] == 'sell') {
+                const titles = Object.keys(JSON.parse(user.titles))
+                const otitles = JSON.parse(user.titles)
+                if (titles.includes(tcontent+' ')) {
+                    otitles[titles.indexOf(tcontent+' ')] = null
+                    user.titles = JSON.stringify(otitles)
+                    msg.reply(`Sold for ${rare[tcontent+' '][3]} R-Points.`)
+                    user.save().then(() => {
+                        user.increment('rp', {by: rare[tcontent+' '][3]})
+                    })
                 }
             }
         }
