@@ -97,11 +97,7 @@ function execute(msg, stats) {
                 console.log(tcontent+' ')
                 console.log(titles)
                 if (titles.includes(tcontent+' ')) {
-                    if ((tcontent+' '+msg.author.globalName).length > 32) {
-                        msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
-                    } else {
-                        msg.member.setNickname(tcontent+' '+msg.author.globalName)
-                    }
+                    msg.member.setNickname(tcontent+' '+msg.author.globalName)
                 } else {
                     msg.reply('You dont own that title.')
                 }
