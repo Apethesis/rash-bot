@@ -104,7 +104,11 @@ function execute(msg, stats) {
                     } 
                 }
                 if (found) {
-                    msg.member.setNickname(tcontent+' '+msg.author.globalName)
+                    if ((tcontent+' '+msg.author.globalName).length > 32) {
+                        msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
+                    } else {
+                        msg.member.setNickname(tcontent+' '+msg.author.globalName)
+                    }
                 } else {
                     msg.reply('You dont own that title.')
                 }
