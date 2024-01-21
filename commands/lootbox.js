@@ -96,8 +96,14 @@ function execute(msg, stats) {
                 const titles = JSON.parse(user.titles)
                 console.log(tcontent+' ')
                 console.log(titles)
-                if (titles.includes(tcontent+' ')) {
-                    console.log("IS THIS EVEN RUNNING AAAAAAAAAAAAAAAA")
+                let found
+                for (i in titles) {
+                    if (titles[i] == tcontent+' ') {
+                        found = true
+                        break
+                    } 
+                }
+                if (found) {
                     msg.member.setNickname(tcontent+' '+msg.author.globalName).then(() => {
                         msg.member.setNickname(null)
                     })
