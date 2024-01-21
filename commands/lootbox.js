@@ -19,7 +19,7 @@ function execute(msg, stats) {
         'The Fool, '
     ]
     const rare = {
-        'Powerful Fighter, ': [1,8,1],
+        'Powerful Fighter, ': [1,8,1], // these are rare nigga...
         'Speed Demon ': [1,8,2],
         'Hero Hunter, ': [1,8,3],
         'Wielder Of The Blade, ': [1,8,4],
@@ -53,7 +53,7 @@ function execute(msg, stats) {
                         if (roll(1,5) == 1) {
                             const gain = commoner[roll(0,commoner.length-1)]
                             const titles = JSON.parse(usr.titles)
-                            if (Object.keys(titles).includes(gain)) {
+                            if (titles.includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 150 })
                             } else {
@@ -71,7 +71,7 @@ function execute(msg, stats) {
                                     break
                                 }
                             }
-                            if (Object.keys(titles).includes(gain)) {
+                            if (titles.includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 300 })
                             } else {
