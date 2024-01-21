@@ -52,8 +52,7 @@ function execute(msg, stats) {
             if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
                     if (user) {
-                        const tstart = args[0].length + args[1].length + 2
-                        const tcontent = msg.content.substring(tstart)
+                        const tcontent = msg.content.substring(12)
                         user.titles[user.titles.length] = tcontent
                     }
                 })
