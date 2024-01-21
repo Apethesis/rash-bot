@@ -48,6 +48,16 @@ function execute(msg, stats) {
                 }
                 msg.reply(strig)
             }).catch((err) => { console.log(err); })
+        case 'title':
+            if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
+                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+                    if (user) {
+                        const tstart = args[0].length + args[1].length + 2
+                        const tcontent = msg.content.substring(tstart)
+                        user.titles[user.titles.length] = tcontent
+                    }
+                })
+            }
 
     }
 }
