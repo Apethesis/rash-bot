@@ -215,7 +215,7 @@ function execute(msg, stats) {
                         if (usr) {
                             if (usr.rp >= Math.round(Number(args[1])) && Math.round(Number(args[1])) != 0 && Math.sign(Number(args[1])) == 1) {
                                 usr.decrement('rp', { by: Math.round(Number(args[1])) }).then((user) => {
-                                    const coinflip = stats.clamp((stats.getRandomInt(1,101)*stats.sessionstats.multi)+stats.sessionstats.mod)stats.getRandomInt(1,101)
+                                    const coinflip = stats.clamp((stats.getRandomInt(1,101)*stats.sessionstats.multi)+stats.sessionstats.mod)
                                     if (!args[2]) { args[2] = 'heads'; }
                                     if (coinflip >= 51 && args[2].toLowerCase() == "heads") { // heads
                                         user.increment('rp', { by: Math.round(Number(args[1])*2) }).then(() => {
