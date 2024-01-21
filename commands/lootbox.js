@@ -85,6 +85,7 @@ function execute(msg, stats) {
                 msg.reply(stri)
             } else if (args[1] == 'equip') {
                 console.log(tcontent+' ')
+                console.log(user.titles.toString())
                 if (user.titles.includes(tcontent+' ')) {
                     if ((tcontent+' '+msg.author.globalName).length > 32) {
                         msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
