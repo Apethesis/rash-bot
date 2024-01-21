@@ -189,7 +189,7 @@ const intstats = {
             type: DataTypes.BIGINT,
             defaultValue: 20,
         },
-       // croles: DataTypes.ARRAY(DataTypes.STRING),
+        titles: DataTypes.ARRAY(DataTypes.STRING),
     }),
     baseSerial: vdb.define('baseSerial', {
         code: {
@@ -203,6 +203,11 @@ const intstats = {
     getRandomInt: randomInt,
     curcd: {},
     rshdb: rshdb,
+    chancetbl: {
+        'solstice': [99999,100000],
+        '   '
+    },
+    commonroles: 
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
