@@ -97,7 +97,9 @@ function execute(msg, stats) {
                 console.log(tcontent+' ')
                 console.log(titles)
                 if (titles.includes(tcontent+' ')) {
-                    msg.member.setNickname(tcontent+' '+msg.author.globalName)
+                    msg.member.setNickname(tcontent+' '+msg.author.globalName).then(() => {
+                        msg.member.setNickname(null)
+                    })
                 } else {
                     msg.reply('You dont own that title.')
                 }
