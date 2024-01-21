@@ -206,7 +206,7 @@ const intstats = {
     chancetbl: {
         'solstice': [99999,100000],
     },
-    commonroles: 
+    commonroles: {}
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
