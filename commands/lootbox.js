@@ -40,7 +40,7 @@ function execute(msg, stats) {
         'The Legendary Saiyan, ': [1,101,19,225000],
         'Near The Strongest, ': [1,101,20,225000],
         'Determined ': [1,126,21,275000],
-        'Solstice ': [1,100000,22,111110101115104111116],
+        'Solstice ': [1,10000000,22,111110101115104111116],
     }
     function roll(min,max) {
         return stats.clamp((stats.getRandomInt(min,max)*stats.sessionstats.multi),min,max)
@@ -53,7 +53,14 @@ function execute(msg, stats) {
                         if (roll(1,5) == 1) {
                             const gain = commoner[roll(0,commoner.length-1)]
                             const titles = JSON.parse(usr.titles)
-                            if (titles.includes(gain)) {
+                            let has
+                            for (i in titles) {
+                                if (titles[i] == gain) {
+                                    has = true
+                                    break
+                                } 
+                            }
+                            if (has) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 150 })
                             } else {
@@ -71,7 +78,14 @@ function execute(msg, stats) {
                                     break
                                 }
                             }
-                            if (titles.includes(gain)) {
+                            let has
+                            for (i in titles) {
+                                if (titles[i] == gain) {
+                                    has = true
+                                    break
+                                } 
+                            }
+                            if (has) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 300 })
                             } else {
@@ -113,9 +127,16 @@ function execute(msg, stats) {
                     msg.reply('You dont own that title.')
                 }
             } else if (args[1] == 'sell') {
-                const titles = Object.keys(JSON.parse(user.titles))
+                const titles = JSON.parse(user.titles)
                 const otitles = JSON.parse(user.titles)
-                if (titles.includes(tcontent+' ')) {
+                let found
+                for (i in titles) {
+                    if (titles[i] == tcontent+' ') {
+                        found = true
+                        break
+                    } 
+                }
+                if (found)) {
                     otitles[titles.indexOf(tcontent+' ')] = null
                     user.titles = JSON.stringify(otitles)
                     msg.reply(`Sold for ${rare[tcontent+' '][3]} R-Points.`)
