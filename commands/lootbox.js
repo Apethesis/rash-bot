@@ -96,6 +96,7 @@ function execute(msg, stats) {
                 const titles = JSON.parse(user.titles)
                 console.log(tcontent+' ')
                 console.log(titles)
+                console.log(`${msg.author.globalName}, ${msg.author.username}`)
                 if (titles.includes(tcontent+' ')) {
                     if ((tcontent+' '+msg.author.globalName).length > 32) {
                         msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
