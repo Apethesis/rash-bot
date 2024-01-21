@@ -205,7 +205,6 @@ const intstats = {
     rshdb: rshdb,
     chancetbl: {
         'solstice': [99999,100000],
-        '   '
     },
     commonroles: 
 }
