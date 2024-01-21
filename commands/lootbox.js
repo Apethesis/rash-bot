@@ -58,6 +58,7 @@ function execute(msg, stats) {
                             } else {
                                 usr.titles.push(gain)
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)')
+                                usr.save()
                             }
                         } else if (roll(1,50) == 50) {
                             let gain
@@ -73,6 +74,7 @@ function execute(msg, stats) {
                             } else {
                                 usr.titles.push(gain)
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)')
+                                usr.save()
                             }
                         } else {
                             msg.reply(`You found: Nothing! (boowomp)`)
