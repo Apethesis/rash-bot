@@ -1,5 +1,7 @@
 function execute(msg, stats) {
     const args = msg.content.split(' ')
+    const tstart = args[0].length + args[1].length + 2
+    const tcontent = msg.content.substring(tstart)
     const commoner = [
         'Normal Chatter, ',
         'Beginner Martial Artist, ',
@@ -37,15 +39,59 @@ function execute(msg, stats) {
         'Heavenly Restricted ': [1,101,18],
         'The Legendary Saiyan, ': [1,101,19],
         'Near The Strongest, ': [1,101,20],
-        'Solstice ': [1,100000,2100],
+        'Determined ': [1,126,21],
+        'Solstice ': [1,100000,22],
+    }
+    function roll(min,max) {
+        return stats.clamp((stats.getRandomInt(min,max)*stats.sessionstats.multi),min,max)
     }
     stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
         if (user) {
             if (args[1] == 'basic') {
                 if (user.rp >= 500) {
                     user.decrement('rp', {by:500}).then((usr) => {
-
+                        if (roll(1,10) == 1) {
+                            const gain = commoner[roll(0,commoner.length-1)]
+                            if (usr.titles.includes(gain)) {
+                                msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
+                                usr.increment('rp', { by: 150 })
+                            } else {
+                                msg.reply(`You found: `+'``'+gain+'`` (Common)')
+                            }
+                        } else if (roll(1,50) == 50) {
+                            let gain
+                            for (i in rare) {
+                                if (roll(rare[i][0],rare[i][1]) == rare[i][2]) {
+                                    gain = i
+                                    break
+                                }
+                            }
+                            if (usr.titles.includes(gain)) {
+                                msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
+                                usr.increment('rp', { by: 300 })
+                            } else {
+                                msg.reply(`You found: `+'``'+gain+'`` (Rare)')
+                            }
+                        } else {
+                            msg.reply(`You found: Nothing! (boowomp)`)
+                        }
                     })
+                }
+            } else if (args[1] == 'inv' || args[1] == 'inventory') {
+                let stri = 'Inventory:\n'
+                for (i in user.titles) {
+                    stri = stri+i+'. '+user.titles[i]+'\n'
+                }
+                msg.reply(stri)
+            } else if (args[1] == 'equip') {
+                if (user.titles.includes(tcontent+' ')) {
+                    if ((tcontent+' '+msg.author.globalName).length > 32) {
+                        msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
+                    } else {
+                        msg.member.setNickname(tcontent+' '+msg.author.globalName)
+                    }
+                } else {
+                    msg.reply('You dont own that title.')
                 }
             }
         }
