@@ -50,7 +50,7 @@ function execute(msg, stats) {
             if (args[1] == 'basic') {
                 if (user.rp >= 500) {
                     user.decrement('rp', {by:500}).then((usr) => {
-                        if (roll(1,10) == 1) {
+                        if (roll(1,5) == 1) {
                             const gain = commoner[roll(0,commoner.length-1)]
                             if (usr.titles.includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
