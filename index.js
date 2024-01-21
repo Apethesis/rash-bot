@@ -189,7 +189,6 @@ const intstats = {
             type: DataTypes.BIGINT,
             defaultValue: 20,
         },
-        titles: DataTypes.ARRAY(DataTypes.STRING),
     }),
     baseSerial: vdb.define('baseSerial', {
         code: {
