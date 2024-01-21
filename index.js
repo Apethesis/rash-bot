@@ -190,8 +190,8 @@ const intstats = {
             defaultValue: 20,
         },
         titles: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            defaultValue: [],
+            type: DataTypes.TEXT,
+            defaultValue: '{}',
         }
     }),
     baseSerial: vdb.define('baseSerial', {

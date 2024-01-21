@@ -52,28 +52,32 @@ function execute(msg, stats) {
                     user.decrement('rp', {by:500}).then((usr) => {
                         if (roll(1,5) == 1) {
                             const gain = commoner[roll(0,commoner.length-1)]
-                            if (usr.titles.includes(gain)) {
+                            const titles = JSON.parse(usr.titles)
+                            if (titles.includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 150 })
                             } else {
-                                usr.titles[usr.titles.length] = gain
+                                titles.push(gain)
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)')
+                                usr.titles = JSON.stringify(titles)
                                 usr.save()
                             }
                         } else if (roll(1,50) == 50) {
                             let gain
+                            const titles = JSON.parse(usr.titles)
                             for (i in rare) {
                                 if (roll(rare[i][0],rare[i][1]) == rare[i][2]) {
                                     gain = i
                                     break
                                 }
                             }
-                            if (usr.titles.includes(gain)) {
+                            if (titles.includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 300 })
                             } else {
-                                usr.titles[usr.titles.length] = gain
+                                titles.push(gain)
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)')
+                                usr.titles = JSON.stringify(titles)
                                 usr.save()
                             }
                         } else {
@@ -83,14 +87,16 @@ function execute(msg, stats) {
                 }
             } else if (args[1] == 'inv' || args[1] == 'inventory') {
                 let stri = 'Inventory:\n'
-                for (i in user.titles) {
-                    stri = stri+i+'. '+user.titles[i]+'\n'
+                const titles = JSON.parse(user.titles)
+                for (i in titles) {
+                    stri = stri+i+'. '+titles[i]+'\n'
                 }
                 msg.reply(stri)
             } else if (args[1] == 'equip') {
+                const titles = JSON.parse(user.titles)
                 console.log(tcontent+' ')
-                console.log(user.titles)
-                if (user.titles.includes(tcontent+' ')) {
+                console.log(titles)
+                if (titles.includes(tcontent+' ')) {
                     if ((tcontent+' '+msg.author.globalName).length > 32) {
                         msg.member.setNickname((tcontent+' '+msg.author.globalName).substring(0,32))
                     } else {

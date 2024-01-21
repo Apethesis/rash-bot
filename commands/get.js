@@ -53,7 +53,10 @@ function execute(msg, stats) {
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
                     if (user) {
                         const tcontent = msg.content.substring(12)
-                        user.titles[user.titles.length] = tcontent
+                        const titles = JSON.parse(user.titles)
+                        titles.push(tcontent)
+                        user.titles = JSON.stringify(titles)
+                        user.save()    
                     }
                 })
             }
