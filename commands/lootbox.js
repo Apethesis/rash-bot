@@ -53,11 +53,11 @@ function execute(msg, stats) {
                         if (roll(1,5) == 1) {
                             const gain = commoner[roll(0,commoner.length-1)]
                             const titles = JSON.parse(usr.titles)
-                            if (titles.includes(gain)) {
+                            if (Object.keys(titles).includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 150 })
                             } else {
-                                titles.push(gain)
+                                titles[Object.keys(titles).length+1] = gain
                                 msg.reply(`You found: `+'``'+gain+'`` (Common)')
                                 usr.titles = JSON.stringify(titles)
                                 usr.save()
@@ -71,11 +71,11 @@ function execute(msg, stats) {
                                     break
                                 }
                             }
-                            if (titles.includes(gain)) {
+                            if (Object.keys(titles).includes(gain)) {
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)'+`\nToo bad you already have this title...`)
                                 usr.increment('rp', { by: 300 })
                             } else {
-                                titles.push(gain)
+                                titles[Object.keys(titles).length+1] = gain
                                 msg.reply(`You found: `+'``'+gain+'`` (Rare)')
                                 usr.titles = JSON.stringify(titles)
                                 usr.save()

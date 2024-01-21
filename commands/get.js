@@ -54,7 +54,7 @@ function execute(msg, stats) {
                     if (user) {
                         const tcontent = msg.content.substring(12)
                         const titles = JSON.parse(user.titles)
-                        titles.push(tcontent)
+                        titles[Object.keys(titles).length+1] = tcontent
                         user.titles = JSON.stringify(titles)
                         user.save()    
                     }
