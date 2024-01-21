@@ -93,7 +93,7 @@ function execute(msg, stats) {
                 }
                 msg.reply(stri)
             } else if (args[1] == 'equip') {
-                const titles = Object.keys(JSON.parse(user.titles))
+                const titles = JSON.parse(user.titles)
                 console.log(tcontent+' ')
                 console.log(titles)
                 if (titles.includes(tcontent+' ')) {
