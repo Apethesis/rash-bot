@@ -202,10 +202,6 @@ const intstats = {
     getRandomInt: randomInt,
     curcd: {},
     rshdb: rshdb,
-    chancetbl: {
-        'solstice': [1,100000,85000],
-    },
-    commonroles: {},
     sessionstats: {
         mod: 0,
         multi: 1,
@@ -401,7 +397,7 @@ client.on(Events.MessageDelete, msg => {
     }
 })
 client.on(Events.MessageUpdate, msg => {
-    if (msg.author.id == '1177722822420877353') {
+    if (msg && msg.author && msg.author.id != '1177722822420877353') {
         client.channels.fetch('1188243316257587281').then((channel) => {
             channel.send({
                 content:`Edited message by ${msg.author.displayName}\nMessage: "${properstr}"`
