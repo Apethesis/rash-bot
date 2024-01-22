@@ -55,7 +55,7 @@ function execute(msg, stats) {
                         if (user) {
                             const tcontent = msg.content.substring(args[0].length + args[1].length + args[2].length + 3)
                             const titles = JSON.parse(user.titles)
-                            titles[Object.keys(titles).length+1] = tcontent
+                            titles[Object.keys(titles).length+1] = tcontent+' '
                             user.titles = JSON.stringify(titles)
                             user.save()
                         }
@@ -65,7 +65,7 @@ function execute(msg, stats) {
                         if (user) {
                             const tcontent = msg.content.substring(12)
                             const titles = JSON.parse(user.titles)
-                            titles[Object.keys(titles).length+1] = tcontent
+                            titles[Object.keys(titles).length+1] = tcontent+' '
                             user.titles = JSON.stringify(titles)
                             user.save()    
                         }
