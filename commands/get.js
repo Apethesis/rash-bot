@@ -50,15 +50,27 @@ function execute(msg, stats) {
             }).catch((err) => { console.log(err); })
         case 'title':
             if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
-                stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
-                    if (user) {
-                        const tcontent = msg.content.substring(12)
-                        const titles = JSON.parse(user.titles)
-                        titles[Object.keys(titles).length+1] = tcontent
-                        user.titles = JSON.stringify(titles)
-                        user.save()    
-                    }
-                })
+                if (args[1] == 'give') {
+                    stats.baseUser.findOne({ where: { id: args[2].substring(2,args[2].length-1) }}).then((user) => {
+                        if (user) {
+                            const tcontent = msg.content.substring(args[0].length + args[1].length + args[2].length + 3)
+                            const titles = JSON.parse(user.titles)
+                            titles[Object.keys(titles).length+1] = tcontent
+                            user.titles = JSON.stringify(titles)
+                            user.save()
+                        }
+                    })
+                } else {
+                    stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
+                        if (user) {
+                            const tcontent = msg.content.substring(12)
+                            const titles = JSON.parse(user.titles)
+                            titles[Object.keys(titles).length+1] = tcontent
+                            user.titles = JSON.stringify(titles)
+                            user.save()    
+                        }
+                    })
+                }
             }
 
     }
