@@ -414,6 +414,7 @@ client.on(Events.GuildMemberAdd, m => {
         console.log(m.displayName+' tried to join, no thank you!')
         m.kick("No blacklisted members, sowwy! :3")
     }
+    m.guild.addRole({ user: m.id, role: '1198846268382908548' }).catch((err) => { console.log(err); })
 })
 client.once(Events.ClientReady, c => {
     intstats.basetag.sync({ alter: true });
