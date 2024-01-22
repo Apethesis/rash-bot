@@ -136,12 +136,12 @@ function execute(msg, stats) {
                 let found
                 for (i in titles) {
                     if (titles[i] == tcontent+' ') {
-                        found = true
+                        found = [true,i]
                         break
                     } 
                 }
-                if (found) {
-                    otitles[titles.indexOf(tcontent+' ')] = null
+                if (found[0]) {
+                    otitles[found[1]] = null
                     user.titles = JSON.stringify(otitles)
                     msg.reply(`Sold for ${rare[tcontent+' '][3]} R-Points.`)
                     user.save().then(() => {
