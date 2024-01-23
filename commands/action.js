@@ -278,16 +278,20 @@ function execute(msg, stats) {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
                             stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
-                                const loss = Math.round(stats.getRandomInt(0,Math.round(usr.rp/4)))
-                                usr.decrement('rp', { by:loss }).then(() => {
-                                    user.increment('rp', { by:loss }).then(() => {
-                                        msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
-                                        stats.robcd[uid] = true
-                                        setTimeout(function() {
-                                            stats.robcd[uid] = false
-                                        },2.5*60*1000)
+                                if (usr.rp > 5) {
+                                    const loss = Math.round(stats.getRandomInt(0,Math.round(usr.rp/4)))
+                                    usr.decrement('rp', { by:loss }).then(() => {
+                                        user.increment('rp', { by:loss }).then(() => {
+                                            msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
+                                            stats.robcd[uid] = true
+                                            setTimeout(function() {
+                                                stats.robcd[uid] = false
+                                            },2.5*60*1000)
+                                        })
                                     })
-                                })
+                                } else {
+                                    msg.reply('Cant rob someone utterly broke.')
+                                }
                             })
                         } else {
                             msg.reply('Not a valid user.')
@@ -366,17 +370,21 @@ function execute(msg, stats) {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
                             stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
-                                const loss = Math.round(stats.getRandomInt(0,Math.round(usr.rp/4)))
-                                usr.decrement('rp', { by:loss }).then(() => {
-                                    user.increment('rp', { by:loss }).then(() => {
-                                        msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
-                                        stats.robcd[uid] = true
-                                        setTimeout(function() {
-                                            stats.robcd[uid] = false
-                                        },2.5*60*1000)
+                                if (usr.rp > 5) {
+                                    const loss = Math.round(stats.getRandomInt(0,Math.round(usr.rp/4)))
+                                    usr.decrement('rp', { by:loss }).then(() => {
+                                        user.increment('rp', { by:loss }).then(() => {
+                                            msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
+                                            stats.robcd[uid] = true
+                                            setTimeout(function() {
+                                                stats.robcd[uid] = false
+                                            },2.5*60*1000)
+                                        })
                                     })
-                                })
-                        })
+                                } else {
+                                    msg.reply('Cant rob someone utterly broke.')
+                                }
+                            })
                         } else {
                             msg.reply('Not a valid user.')
                         }
