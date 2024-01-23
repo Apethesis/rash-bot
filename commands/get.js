@@ -8,7 +8,7 @@ function execute(msg, stats) {
             if (args[1]) {
                 stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                     if (user) {
-                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
+                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nBank Balance: ${user.bankbalance}/${user.banklimit} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
                     } else {
                         stats.baseUser.create({
                             id: args[1].substring(2,args[1].length-1),
@@ -21,7 +21,7 @@ function execute(msg, stats) {
             } else {
                 stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
                     if (user) {
-                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
+                        msg.reply(`Level: ${user.lv}\nEXP: ${user.exp}\nBalance: ${user.rp} R-Points\nBank Balance: ${user.bankbalance}/${user.banklimit} R-Points\nTo next level: ${Math.round(500 * ((1+(user.lv * 0.1))*user.lv)-user.exp)} EXP`)
                     } else {
                         stats.baseUser.create({
                             id: msg.author.id,

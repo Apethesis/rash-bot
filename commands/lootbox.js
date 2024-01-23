@@ -132,7 +132,6 @@ function execute(msg, stats) {
                 }
             } else if (args[1] == 'sell') {
                 const titles = JSON.parse(user.titles)
-                const otitles = JSON.parse(user.titles)
                 let found
                 for (i in titles) {
                     if (titles[i] == tcontent+' ') {
@@ -140,9 +139,11 @@ function execute(msg, stats) {
                         break
                     } 
                 }
-                if (found[0]) {
-                    otitles[found[1]] = null
-                    user.titles = JSON.stringify(otitles)
+                console.log(found)
+                console.log(titles)
+                if (found) {
+                    titles[found[1]] = undefined
+                    user.titles = JSON.stringify(titles)
                     msg.reply(`Sold for ${rare[tcontent+' '][3]} R-Points.`)
                     user.save().then(() => {
                         user.increment('rp', {by: rare[tcontent+' '][3]})
@@ -150,6 +151,43 @@ function execute(msg, stats) {
                 }
             } else if (args[1] == 'unequip') {
                 msg.member.setNickname(null)
+            } else if (args[1] == 'give') {
+                const nstart = args[0].length + args[1].length + args[2].length + 3
+                const ncontent = msg.content.substring(nstart)
+                stats.baseUser.findOne({ where: { id: args[2].substring(2,args[2].length-1) }}).then((usr) => {
+                    if (usr) {
+                        const titles = JSON.parse(user.titles)
+                        let found
+                        for (i in titles) {
+                            if (titles[i] == ncontent+' ') {
+                                found = [true,i]
+                                break
+                            } 
+                        }
+                        if (found) {
+                            const otitles = JSON.parse(usr.titles)
+                            let has
+                            for (i in otitles) {
+                                if (otitles[i] == ncontent+' ') {
+                                    has = true
+                                    break
+                                } 
+                            }
+                            if (has) {
+                                msg.reply('User already has this title.')
+                            } else {
+                                titles[found[1]] = undefined
+                                otitles[Object.keys(otitles).length+1] = ncontent+' '
+                                usr.titles = JSON.stringify(otitles)
+                                user.titles = JSON.stringify(titles)
+                                user.save()
+                                usr.save()
+                                msg.reply('Gave title ``'+ncontent+'``'+` to ${args[2]}.`)
+                            }
+
+                        }
+                    }
+                })
             }
         }
     }).catch(() => {})

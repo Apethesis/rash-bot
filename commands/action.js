@@ -329,6 +329,28 @@ function execute(msg, stats) {
                     })
                 }
                 break
+            case 'rob':
+                const uid = args[1].substring(2,args[1].length-1)
+                if (stats.robcd[uid]) {
+                    msg.reply('Give the man a break, robbing him is still on cooldown.')
+                } else {
+                    stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
+                        if (usr) {
+                            const loss = stats.getRandomInt(0,usr.rp/4)
+                            usr.decrement('rp', { by:loss }).then(() => {
+                                user.increment('rp', { by:loss }).then(() => {
+                                    msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
+                                    stats.robcd[uid] = true
+                                    setTimeout(function() {
+                                        stats.robcd[uid] = false
+                                    },2.5*60*1000)
+                                })
+                            })
+                        } else {
+                            msg.reply('Not a valid user.')
+                        }
+                    })
+                }
         }
     }
 }

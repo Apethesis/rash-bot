@@ -192,6 +192,14 @@ const intstats = {
         titles: {
             type: DataTypes.TEXT,
             defaultValue: '{}',
+        },
+        banklimit: {
+            type: DataTypes.BIGINT,
+            defaultValue: 1000000
+        },
+        bankbalance: {
+            type: DataTypes.BIGINT,
+            defaultValue: 0,
         }
     }),
     baseSerial: vdb.define('baseSerial', {
@@ -211,6 +219,7 @@ const intstats = {
         multi: 1,
     },
     clamp: (num, min, max) => Math.min(Math.max(num, min), max),
+    robcd: {},
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {
