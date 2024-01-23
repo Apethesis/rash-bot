@@ -6,7 +6,7 @@ function execute(msg, stats) {
                 user.decrement('rp',{ by: 300000 }).then((usr) => {
                     usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
                 }).catch((err) => { console.log(err); })
-                msg.reply(`Increased bank limit to ${user.banklimit+100000}`)
+                msg.reply(`Increased bank limit to ${Number(user.banklimit)+100000}`)
             } else {
                 msg.reply('You dont have enough R-Points to upgrade. (300k required)')
             }
