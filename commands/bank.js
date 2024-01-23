@@ -19,7 +19,7 @@ function execute(msg, stats) {
             } else {
                 msg.reply('Not enough R-Points, or invalid number. (brokie either way)')
             }
-        } else if (args[1] == 'withdraw' && (user.bankbalance + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
+        } else if (args[1] == 'withdraw' ) {
             if (user.bankbalance >= (Math.round(Number(args[2])) || 0)) {
                 user.decrement('bankbalance',{ by: (Math.round(Number(args[2])) || 0) }).then((usr) => {
                     usr.increment('rp', { by: (Math.round(Number(args[2])) || 0) }).catch((err) => { console.log(err); })
