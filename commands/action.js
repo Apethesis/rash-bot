@@ -268,6 +268,7 @@ function execute(msg, stats) {
                     }
                     msg.reply(`Set session ${args[1]} to ${args[2]}`)
                 }
+                break
             case 'rob':
                 const uid = args[1].substring(2,args[1].length-1)
                 if (stats.robcd[uid]) {
