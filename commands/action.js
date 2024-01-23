@@ -272,6 +272,8 @@ function execute(msg, stats) {
                 const uid = args[1].substring(2,args[1].length-1)
                 if (stats.robcd[uid]) {
                     msg.reply('Give the man a break, robbing him is still on cooldown.')
+                } else if (uid == msg.author.id) {
+                    msg.reply('Cant rob yourself bitch.')
                 } else {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
@@ -358,6 +360,8 @@ function execute(msg, stats) {
                 const uid = args[1].substring(2,args[1].length-1)
                 if (stats.robcd[uid]) {
                     msg.reply('Give the man a break, robbing him is still on cooldown.')
+                } else if (uid == msg.author.id) {
+                    msg.reply('Cant rob yourself bitch.')
                 } else {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
