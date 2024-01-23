@@ -10,7 +10,7 @@ function execute(msg, stats) {
             } else {
                 msg.reply('You dont have enough R-Points to upgrade. (300k required)')
             }
-        } else if (args[1] == 'deposit' && (user.bankbalance + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
+        } else if (args[1] == 'deposit' && (Number(user.bankbalance) + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
             if (user.rp >= (Math.round(Number(args[2])) || 0)) {
                 user.decrement('rp',{ by: (Math.round(Number(args[2])) || 0) }).then((usr) => {
                     usr.increment('bankbalance', { by: (Math.round(Number(args[2])) || 0) }).catch((err) => { console.log(err); })
