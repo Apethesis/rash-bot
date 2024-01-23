@@ -275,7 +275,7 @@ function execute(msg, stats) {
                 } else {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
-                            const loss = stats.getRandomInt(0,usr.rp/4)
+                            const loss = Math.round(stats.getRandomInt(0,usr.rp/4))
                             usr.decrement('rp', { by:loss }).then(() => {
                                 user.increment('rp', { by:loss }).then(() => {
                                     msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
@@ -359,7 +359,7 @@ function execute(msg, stats) {
                 } else {
                     stats.baseUser.findOne({ where: { id: uid }}).then((usr) => {
                         if (usr) {
-                            const loss = stats.getRandomInt(0,usr.rp/4)
+                            const loss = Math.round(stats.getRandomInt(0,usr.rp/4))
                             usr.decrement('rp', { by:loss }).then(() => {
                                 user.increment('rp', { by:loss }).then(() => {
                                     msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
