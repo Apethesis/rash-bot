@@ -5,25 +5,25 @@ function execute(msg, stats) {
             if (Number(args[2])) {
                 let totalup = 0
                 for (let i = 1; i <= Number(args[2]); i++) {
-                    if (user.rp >= 300000) {
-                        user.decrement('rp',{ by: 300000 }).then((usr) => {
+                    if (user.rp >= 200000) {
+                        user.decrement('rp',{ by: 200000 }).then((usr) => {
                             totalup = Number(totalup) + 100000
                             usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
                         }).catch((err) => { console.log(err); })
                     } else {
-                        msg.reply('You dont have enough R-Points to upgrade. (300k required)')
+                        msg.reply('You dont have enough R-Points to upgrade. (200k required)')
                         break
                     }
                 }
                 msg.reply(`Increased bank limit to ${Number(user.banklimit)+totalup}`)
             } else {
-                if (user.rp >= 300000) {
-                    user.decrement('rp',{ by: 300000 }).then((usr) => {
+                if (user.rp >= 200000) {
+                    user.decrement('rp',{ by: 200000 }).then((usr) => {
                         usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
                     }).catch((err) => { console.log(err); })
                     msg.reply(`Increased bank limit to ${Number(user.banklimit)+100000}`)
                 } else {
-                    msg.reply('You dont have enough R-Points to upgrade. (300k required)')
+                    msg.reply('You dont have enough R-Points to upgrade. (200k required)')
                 }
             }
         } else if (args[1] == 'deposit' && (Number(user.bankbalance) + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
