@@ -2,13 +2,27 @@ function execute(msg, stats) {
     const args = msg.content.split(' ')
     stats.baseUser.findOne({ where: { id: msg.author.id }}).then((user) => {
         if (args[1] == 'upgrade') {
-            if (user.rp >= 250000) {
-                user.decrement('rp',{ by: 300000 }).then((usr) => {
-                    usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
-                }).catch((err) => { console.log(err); })
-                msg.reply(`Increased bank limit to ${Number(user.banklimit)+100000}`)
+            if (Number(args[2])) {
+                for (let i = 0; i <= Number(args[2]); i++) {
+                    if (user.rp >= 250000) {
+                        user.decrement('rp',{ by: 300000 }).then((usr) => {
+                            usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
+                        }).catch((err) => { console.log(err); })
+                        msg.reply(`Increased bank limit to ${Number(user.banklimit)+100000}`)
+                    } else {
+                        msg.reply('You dont have enough R-Points to upgrade. (300k required)')
+                        break
+                    }
+                }
             } else {
-                msg.reply('You dont have enough R-Points to upgrade. (300k required)')
+                if (user.rp >= 250000) {
+                    user.decrement('rp',{ by: 300000 }).then((usr) => {
+                        usr.increment('banklimit',{ by: 100000 }).catch((err) => { console.log(err); })
+                    }).catch((err) => { console.log(err); })
+                    msg.reply(`Increased bank limit to ${Number(user.banklimit)+100000}`)
+                } else {
+                    msg.reply('You dont have enough R-Points to upgrade. (300k required)')
+                }
             }
         } else if (args[1] == 'deposit' && (Number(user.bankbalance) + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
             if (user.rp >= (Math.round(Number(args[2])) || 0)) {
