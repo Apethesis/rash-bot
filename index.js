@@ -202,7 +202,7 @@ const intstats = {
             defaultValue: 0,
         },
         testvalue: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.DECIMAL,
             defaultValue: 200,
         }
     }),
