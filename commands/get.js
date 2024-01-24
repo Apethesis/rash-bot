@@ -48,6 +48,7 @@ function execute(msg, stats) {
                 }
                 msg.reply(strig)
             }).catch((err) => { console.log(err); })
+            break
         case 'title':
             if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
                 if (args[1] == 'give') {
@@ -72,6 +73,7 @@ function execute(msg, stats) {
                     })
                 }
             }
+            break
         case 'user':
             stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                 if (user) {
@@ -80,6 +82,7 @@ function execute(msg, stats) {
                     msg.reply(`Invalid user.`)
                 }
             })
+            break
 
     }
 }
