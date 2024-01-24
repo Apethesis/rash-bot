@@ -456,14 +456,14 @@ client.once(Events.ClientReady, c => {
                 if (intstats.status.location == "Website" && intstats.status.presenceType == 1) {
                     const embed = new EmbedBuilder()
                         .setColor(0xFF0000)
-                        .setTitle('Mino is wasting away the little time he has left instead of getting his ass in studio.')
+                        .setTitle('Mino is wasting away the time he has instead of getting his ass in studio.')
                         .setDescription('On the website (its so minover........).')
                         .setFooter({ text: `${intstats.status.presenceType}, ${intstats.status.location || "none"}` })
                     c.guilds.cache.get(`${process.env.GLID}`).channels.cache.get(`${process.env.CHID}`).send({ embeds: [embed] })
                 } else if (intstats.status.location.includes('Studio') || intstats.status.presenceType == 3) {
                     const embed = new EmbedBuilder()
                         .setColor(0x00FF00)
-                        .setTitle('Mino is in studio, probably changing a few values and then closing it before actually working on shallot.')
+                        .setTitle('Mino is in studio, probably changing a few values and then closing it before actually working on vegeta. (FUCK THE DBR REWORK!)')
                         .setDescription('In studio, this is good news.')
                         .setFooter({ text: `${intstats.status.presenceType}, ${intstats.status.location || "none"}` })
                     c.guilds.cache.get(`${process.env.GLID}`).channels.cache.get(`${process.env.CHID}`).send({ embeds: [embed] })
