@@ -200,6 +200,10 @@ const intstats = {
         bankbalance: {
             type: DataTypes.BIGINT,
             defaultValue: 0,
+        },
+        testvalue: {
+            type: DataTypes.BIGINT,
+            defaultValue: 200,
         }
     }),
     baseSerial: vdb.define('baseSerial', {

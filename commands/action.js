@@ -379,7 +379,7 @@ function execute(msg, stats) {
                                             stats.robcd[uid] = true
                                             setTimeout(function() {
                                                 stats.robcd[uid] = false
-                                            },2.5*60*1000)
+                                            },10*60*1000)
                                         })
                                     })
                                 } else {
