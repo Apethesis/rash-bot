@@ -204,7 +204,7 @@ const intstats = {
         testvalue: {
             type: DataTypes.DECIMAL,
             defaultValue: 200,
-        }
+        },
     }),
     baseSerial: vdb.define('baseSerial', {
         code: {
@@ -224,6 +224,7 @@ const intstats = {
     },
     clamp: (num, min, max) => Math.min(Math.max(num, min), max),
     robcd: {},
+    grobcd: {},
 }
 function relatisend(msg, tochannel) {
     if (msg.embeds.length > 0) {

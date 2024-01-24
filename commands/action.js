@@ -363,7 +363,9 @@ function execute(msg, stats) {
                 break
             case 'rob':
                 const uid = args[1].substring(2,args[1].length-1)
-                if (stats.robcd[uid]) {
+                if (stats.grobcd[msg.author.id]) {
+                    msg.reply('Dont you feel tired robbing this much?')
+                } else if (stats.robcd[uid]) {
                     msg.reply('Give the man a break, robbing him is still on cooldown.')
                 } else if (uid == msg.author.id) {
                     msg.reply('Cant rob yourself bitch.')
@@ -377,9 +379,13 @@ function execute(msg, stats) {
                                         user.increment('rp', { by:loss }).then(() => {
                                             msg.reply(`You stole ${loss} R-Points from ${args[1]}.`)
                                             stats.robcd[uid] = true
+                                            stats.grobcd[msg.author.id] = true
                                             setTimeout(function() {
                                                 stats.robcd[uid] = false
                                             },10*60*1000)
+                                            setTimeout(function() {
+                                                stats.grobcd[msg.author.id] = false
+                                            },5*60*1000)
                                         })
                                     })
                                 } else {
