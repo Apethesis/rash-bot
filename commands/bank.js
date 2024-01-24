@@ -26,8 +26,13 @@ function execute(msg, stats) {
                     msg.reply('You dont have enough R-Points to upgrade. (200k required)')
                 }
             }
-        } else if (args[1] == 'deposit' && (Number(user.bankbalance) + (Math.round(Number(args[2])) || 0)) <= user.banklimit) {
-            if (user.rp >= (Math.round(Number(args[2])) || 0)) {
+        } else if (args[1] == 'deposit' && ((Number(user.bankbalance) + (Math.round(Number(args[2])) || 0)) <= user.banklimit) || (args[2] == 'all' && ((Number(user.bankbalance) + (Math.round(Number(user.rp)) || 0)) <= user.banklimit)) ) {
+            if (args[2] == 'all') {
+                user.decrement('rp',{ by: user.rp }).then((usr) => {
+                    usr.increment('bankbalance', { by: user.rp }).catch((err) => { console.log(err); })
+                }).catch((err) => { console.log(err); })
+                msg.reply(`Deposited ${user.rp} R-Points into bank.`)
+            } else if (user.rp >= (Math.round(Number(args[2])) || 0)) {
                 user.decrement('rp',{ by: (Math.round(Number(args[2])) || 0) }).then((usr) => {
                     usr.increment('bankbalance', { by: (Math.round(Number(args[2])) || 0) }).catch((err) => { console.log(err); })
                 }).catch((err) => { console.log(err); })
