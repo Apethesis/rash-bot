@@ -73,7 +73,7 @@ function execute(msg, stats) {
                 }
             }
         case 'user':
-            stats.baseUser.findOne({ where: { id: args[2].substring(2,args[2].length-1) }}).then((user) => {
+            stats.baseUser.findOne({ where: { id: args[1].substring(2,args[1].length-1) }}).then((user) => {
                 if (user) {
                     msg.reply(`Stat is equal to ${user[args[3]]}`)
                 } else {
