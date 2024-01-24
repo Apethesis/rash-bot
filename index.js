@@ -186,7 +186,7 @@ const intstats = {
         },
         cmsg: DataTypes.SMALLINT,
         rp: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.DECIMAL,
             defaultValue: 20,
         },
         titles: {
@@ -194,11 +194,11 @@ const intstats = {
             defaultValue: '{}',
         },
         banklimit: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.DECIMAL,
             defaultValue: 1000000
         },
         bankbalance: {
-            type: DataTypes.BIGINT,
+            type: DataTypes.DECIMAL,
             defaultValue: 0,
         },
         testvalue: {
