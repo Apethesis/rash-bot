@@ -138,6 +138,7 @@ const intstats = {
         'vegito': 'VegitoSSB.mp4',
         'gogetame': 'GogetaBlueME.mp4',
         'gogetaffk': 'GogetaBlueFFK.mp4',
+        'ryoikitenkai': 'Gojover.mp4'
     },
     authroles: {
         '1161076090677243994': true,
