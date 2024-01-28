@@ -415,14 +415,14 @@ client.on(Events.MessageDelete, msg => {
         }
     }
 })
-client.on(Events.MessageUpdate, msg => {
-    if (msg && msg.author && msg.author.id != '1177722822420877353') {
-        client.channels.fetch('1188243316257587281').then((channel) => {
-            channel.send({
-                content:`Edited message by ${msg.author.displayName}\nMessage: "${properstr}"`
-            })
-        }).catch(() => {})
-    }
+client.on(Events.MessageUpdate, (omsg, nmsg) => {
+    const oproperstr = omsg.content.replace(/@everyone|@here/gi, '');
+    const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
+    client.channels.fetch('1188243316257587281').then((channel) => {
+        channel.send({
+            content: `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}\nNew Message: "${properstr}"`
+        })
+    }).catch((err) => { console.log(err); })
 })
 client.on(Events.GuildMemberAdd, m => {
     if (intstats.blacklisted[m.id]) {
