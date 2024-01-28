@@ -88,23 +88,36 @@ function execute(msg, stats) {
                                 },13*1000)
                             })
                         } else {
-                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).then(() => {
-                                msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
-                                if (args[2].substring(2,args[2].length-1) == '772929718047473724') {
-                                    msg.channel.send('https://tenor.com/view/gate-close-jujutsu-kaisen-gojo-prison-realm-sealed-gif-11882127185527302352')
-                                } else {
-                                    msg.channel.send('https://tenor.com/view/gojo-domain-expansion-gif-19197982')
-                                }
-                                if (args[3]) {
+                            if (args[3] && (stats.argtosec(args[3])*1000 > 600000)) {
+                                msg.reply({ files: ['./tags/Gojover.mp4'] }).then(() => {
                                     setTimeout(() => {
-                                        msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
-                                        msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch(() => {})
-                                    },stats.argtosec(args[3])*1000)
-                                }
-                            }).catch(() => {
-                                msg.channel.send('Domain Expansion failed, either the specified user is too high rank, doesnt exist or is already in a domain.')
-                                failed = true
-                            })
+                                        msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch((err) => { console.log(err) });
+                                        msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'}).catch((err) => { console.log(err) });
+                                        setTimeout(() => {
+                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
+                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch(() => {})
+                                        },stats.argtosec(args[3])*1000)
+                                    },63*1000)
+                                })
+                            } else {
+                                msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).then(() => {
+                                    msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
+                                    if (args[2].substring(2,args[2].length-1) == '772929718047473724') {
+                                        msg.channel.send('https://tenor.com/view/gate-close-jujutsu-kaisen-gojo-prison-realm-sealed-gif-11882127185527302352')
+                                    } else {
+                                        msg.channel.send('https://tenor.com/view/gojo-domain-expansion-gif-19197982')
+                                    }
+                                    if (args[3]) {
+                                        setTimeout(() => {
+                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
+                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch(() => {})
+                                        },stats.argtosec(args[3])*1000)
+                                    }
+                                }).catch(() => {
+                                    msg.channel.send('Domain Expansion failed, either the specified user is too high rank, doesnt exist or is already in a domain.')
+                                    failed = true
+                                })
+                            }
                         }
                     } else if (args[1] == 'malevolentshrine') {
                         if (secure[args[2].substring(2,args[2].length-1)]) {
