@@ -416,7 +416,7 @@ client.on(Events.MessageDelete, msg => {
     }
 })
 client.on(Events.MessageUpdate, (omsg, nmsg) => {
-    if (nmsg.author.id == client.id) {
+    if (nmsg.author.id != '1177722822420877353') {
         const oproperstr = omsg.content.replace(/@everyone|@here/gi, ''); 
         const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
         let custring = `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}"\nNew Message: "${properstr}"`
