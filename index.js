@@ -416,13 +416,17 @@ client.on(Events.MessageDelete, msg => {
     }
 })
 client.on(Events.MessageUpdate, (omsg, nmsg) => {
-    const oproperstr = omsg.content.replace(/@everyone|@here/gi, '');
-    const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
-    client.channels.fetch('1188243316257587281').then((channel) => {
-        channel.send({
-            content: `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}\nNew Message: "${properstr}"`
-        })
-    }).catch((err) => { console.log(err); })
+    if (nmsg.author.id == client.id) {
+        const oproperstr = omsg.content.replace(/@everyone|@here/gi, ''); 
+        const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
+        let custring = `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}"\nNew Message: "${properstr}"`
+        if (custring.length > 2000) { const newstring = custring.substring(0,2000); custring = newstring }
+        client.channels.fetch('1188243316257587281').then((channel) => {
+            channel.send({
+                content: custring
+            })
+        }).catch((err) => { console.log(err); })
+    }
 })
 client.on(Events.GuildMemberAdd, m => {
     if (intstats.blacklisted[m.id]) {
