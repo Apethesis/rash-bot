@@ -523,7 +523,7 @@ client.on(Events.MessageReactionAdd, async (msgr, user) => {
         } else if (msgr.emoji.id == '1191710190643462144') { // oofy
             msgr.emoji.guild.members.addRole({user: user.id, role: '1197366106369818754'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1198928221706666024') { // updoots
-            msgr.emoji.guild.members.addRole({user: user.id, role: '1198928221706666024' }).catch((err) => { console.log(err); })
+            msgr.emoji.guild.members.addRole({user: user.id, role: '1201567312680075324' }).catch((err) => { console.log(err); })
         }
     }
 })
@@ -544,7 +544,7 @@ client.on(Events.MessageReactionRemove, async (msgr, user) => {
         } else if (msgr.emoji.id == '1191710190643462144') { // oofy
             msgr.emoji.guild.members.removeRole({user: user.id, role: '1197366106369818754'}).catch((err) => { console.log(err); })
         } else if (msgr.emoji.id == '1198928221706666024') { // updoots
-            msgr.emoji.guild.members.removeRole({user: user.id, role: '1198928221706666024' }).catch((err) => { console.log(err); })
+            msgr.emoji.guild.members.removeRole({user: user.id, role: '1201567312680075324' }).catch((err) => { console.log(err); })
         }
     }
 })
