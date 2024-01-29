@@ -417,7 +417,7 @@ client.on(Events.MessageDelete, msg => {
 })
 client.on(Events.MessageUpdate, (omsg, nmsg) => {
     if (nmsg.channel.id == '1196363461354070036' && !(nmsg.content == "https://tenor.com/view/toji-toji-fushiguro-jujutsu-kaisen-jujutsu-kaisen-season-2-jjk-gif-14137776531255548484" || nmsg.content == "toji fushigiro")) {
-       msg.delete().catch((err) => { console.log(err) })
+       nmsg.delete().catch((err) => { console.log(err) })
     }
     if (nmsg.author.id != '1177722822420877353') {
         const oproperstr = omsg.content.replace(/@everyone|@here/gi, ''); 
