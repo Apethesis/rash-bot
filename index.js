@@ -419,18 +419,22 @@ client.on(Events.MessageUpdate, (omsg, nmsg) => {
     if (nmsg.channel.id == '1196363461354070036' && !(nmsg.content == "https://tenor.com/view/toji-toji-fushiguro-jujutsu-kaisen-jujutsu-kaisen-season-2-jjk-gif-14137776531255548484" || nmsg.content == "toji fushigiro")) {
        nmsg.delete().catch((err) => { console.log(err) })
     }
-    if (nmsg.author.id != '1177722822420877353') {
-        const oproperstr = omsg.content.replace(/@everyone|@here/gi, ''); 
-        const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
-        if (oproperstr != properstr) {
-            let custring = `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}"\nNew Message: "${properstr}"`
-            if (custring.length > 2000) { const newstring = custring.substring(0,2000); custring = newstring }
-            client.channels.fetch('1188243316257587281').then((channel) => {
-                channel.send({
-                    content: custring
-                })
-            }).catch((err) => { console.log(err); })
+    try {
+        if (nmsg.author.id != '1177722822420877353') {
+            const oproperstr = omsg.content.replace(/@everyone|@here/gi, ''); 
+            const properstr = nmsg.content.replace(/@everyone|@here/gi, '');
+            if (oproperstr != properstr) {
+                let custring = `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}"\nNew Message: "${properstr}"`
+                if (custring.length > 2000) { const newstring = custring.substring(0,2000); custring = newstring }
+                client.channels.fetch('1188243316257587281').then((channel) => {
+                    channel.send({
+                        content: custring
+                    })
+                }).catch((err) => { console.log(err); })
+            }
         }
+    } catch (err) {
+        console.log(err)
     }
 })
 client.on(Events.GuildMemberAdd, m => {
