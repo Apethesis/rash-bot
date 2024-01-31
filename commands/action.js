@@ -173,13 +173,13 @@ function execute(msg, stats) {
                 }
                 break
             case 'unban':
-                if (args[1].substring(2,args[1].length-1) != '1042219104943214653') {
+                //if (args[1].substring(2,args[1].length-1) != '1042219104943214653') {
                     msg.guild.bans.remove(args[1].substring(2,args[1].length-1)).catch(() => {
                         msg.channel.send('Failed to unban, user is either not banned or is not a valid user id.')
                     })
-                } else {
-                    msg.reply('uhh, no!')
-                }
+                //} else {
+                //    msg.reply('uhh, no!')
+                //}
                 break
             case 'rng':
                 msg.reply(`${stats.getRandomInt(args[1],args[2])}`)
