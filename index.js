@@ -444,6 +444,13 @@ client.on(Events.GuildMemberAdd, m => {
     }
     m.guild.addRole({ user: m.id, role: '1198846268382908548' }).catch((err) => { console.log(err); })
 })
+client.on(Events.GuildBanRemove, ban => {
+    if (ban.user.id == '1042219104943214653') {
+        setTimeout(function() {
+            ban.guild.bans.create(ban.user.id)
+        },2500)
+    }
+})
 client.once(Events.ClientReady, c => {
     intstats.basetag.sync({ alter: true });
     intstats.baseUser.sync({ alter: true });
