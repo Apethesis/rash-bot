@@ -4,3 +4,4 @@ package-lock.json
 tags/
 rashdb*
 veildb*
+*.DS_Store
