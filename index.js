@@ -158,7 +158,7 @@ const intstats = {
         afterlife: '1267592432598646846'
     },
     proles: {
-        infinitevoid: '1265600255039111209',
+        infinitevoid: '1358911325949923429',
         death: '1267591908830478356',
         member: '1265600931173498932'   
     },
