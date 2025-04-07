@@ -40,7 +40,8 @@ function execute(msg, stats) {
         'The Legendary Saiyan, ': [1,101,19,225000],
         'Near The Strongest, ': [1,101,20,225000],
         'Determined ': [1,126,21,275000],
-        'Solstice ': [1,10000000,22,111110101115104111116n],
+        'Ultra ': [1,275,22,325000],
+        'Solstice ': [1,10000000,23,111110101115104111116n],
     }
     function roll(min,max) {
         return stats.clamp((stats.getRandomInt(min,max)*stats.sessionstats.multi),min,max)

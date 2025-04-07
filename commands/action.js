@@ -1,4 +1,4 @@
-const { MessageManager } = require("discord.js");
+const { MessageManager, Message } = require("discord.js");
 
 function execute(msg, stats) {
     const secure = {
@@ -8,18 +8,14 @@ function execute(msg, stats) {
         '1140029502005719071': true,
         '1055982077293629530': true,
         '928018293657313371': true,
-    }
+    }               
     const prevtx = msg.content.substring(7).split("<");
     const num = prevtx[1].lastIndexOf(">");
     const action = prevtx[1].substring(num,0).toLowerCase()
     const args = msg.content.split(' ')
-    const authorized = {
-        '1198041664804106250': true,
-        '1198046098703528106': true,
-        '1192565756899102830': true,
-        '1196898349798924439': true,
-        '1196755851613044777': true,
-    }
+    const authorized = stats.authroles
+    console.log(authorized[msg.member.roles.highest.id])
+    console.log(msg.member.roles.highest.id)
     if (msg.author.id == '1168868176189198418' || authorized[msg.member.roles.highest.id]) {
         switch (action) {
             case 'kick':
@@ -78,10 +74,10 @@ function execute(msg, stats) {
                         if (secure[args[2].substring(2,args[2].length-1)]) {
                             msg.reply({ files: ['./tags/Reversal.webm'] }).then(() => {
                                 setTimeout(() => {
-                                    msg.guild.members.addRole({user: msg.author.id, role: '1193552982806106182'}).then(() => {
-                                        if (args[3]) {
-                                            setTimeout(() => {
-                                                msg.guild.members.removeRole({user: msg.author.id, role: '1193552982806106182'}).catch(() => {})
+                                    msg.guild.members.addRole({user: msg.author.id, role: stats.proles.infinitevoid}).then(() => {
+                                        if (args[3]) {          
+                                                setTimeout(() => {
+                                                msg.guild.members.removeRole({user: msg.author.id, role: stats.proles.infinitevoid}).catch(() => {})
                                             },stats.argtosec(args[3])*1000)
                                         }
                                     }).catch(() => {})
@@ -91,17 +87,17 @@ function execute(msg, stats) {
                             if (args[3] && (stats.argtosec(args[3])*1000 > 600000)) {
                                 msg.reply({ files: ['./tags/Gojover.mp4'] }).then(() => {
                                     setTimeout(() => {
-                                        msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch((err) => { console.log(err) });
-                                        msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'}).catch((err) => { console.log(err) });
+                                        msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.infinitevoid}).catch((err) => { console.log(err) });
+                                        msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.member}).catch((err) => { console.log(err) });
                                         setTimeout(() => {
-                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
-                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch(() => {})
+                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.member})
+                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.infinitevoid}).catch(() => {})
                                         },stats.argtosec(args[3])*1000)
                                     },63*1000)
                                 })
                             } else {
-                                msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).then(() => {
-                                    msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
+                                msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.infinitevoid}).then(() => {
+                                    msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.member})
                                     if (args[2].substring(2,args[2].length-1) == '772929718047473724') {
                                         msg.channel.send('https://tenor.com/view/gate-close-jujutsu-kaisen-gojo-prison-realm-sealed-gif-11882127185527302352')
                                     } else {
@@ -109,11 +105,12 @@ function execute(msg, stats) {
                                     }
                                     if (args[3]) {
                                         setTimeout(() => {
-                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: '1198846473186574396'})
-                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: '1193552982806106182'}).catch(() => {})
+                                            msg.guild.members.addRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.member})
+                                            msg.guild.members.removeRole({user: args[2].substring(2,args[2].length-1), role: stats.proles.infinitevoid}).catch(() => {})
                                         },stats.argtosec(args[3])*1000)
                                     }
-                                }).catch(() => {
+                                }).catch((err) => {
+                                    console.log(err)    
                                     msg.channel.send('Domain Expansion failed, either the specified user is too high rank, doesnt exist or is already in a domain.')
                                     failed = true
                                 })
@@ -144,9 +141,9 @@ function execute(msg, stats) {
                     }
                 }
                 break
-            case 'shrunkage':
-                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: '1198846473186574396'})
-                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: '1193552982806106182'}).catch(() => {
+            case 'lobotomy  ':
+                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.member})
+                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.infinitevoid}).catch(() => {
                     msg.channel.send('Domain Shrunkage failed, either the specified user is too high rank, doesnt exist or is not in domain expansion.')
                 })
                 break
@@ -188,24 +185,24 @@ function execute(msg, stats) {
                 if (secure[args[1].substring(2,args[1].length-1)]) {
                     msg.reply({ files: ['./tags/Reversal.webm'] }).then(() => {
                         setTimeout(() => {
-                            msg.guild.members.addRole({user: msg.author.id, role: '1196190338797273108'})
-                            msg.guild.members.removeRole({user: msg.author.id, role: '1198846473186574396'}) 
+                            msg.guild.members.addRole({user: msg.author.id, role: stats.proles.death})
+                            msg.guild.members.removeRole({user: msg.author.id, role: stats.proles.member}) 
                         },13*1000)
                     })
                 } else {
                     msg.channel.send("This next one's gonna wipe you off the face of the planet!").then((omsg) => {
                         omsg.reply({ files: [`./tags/GogetaBlueFFK.mp4`] }).then(() => {
                             setTimeout(() => {
-                                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: '1196190338797273108'})
-                                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: '1198846473186574396'})
+                                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.death})
+                                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.member})
                             },27.5*1000)
                         }).catch((err) => { console.log(err); })
                     }).catch((err) => { console.log(err); })
                 }
                 break
             case 'revive':
-                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: '1196190338797273108'})
-                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: '1198846473186574396'})
+                msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.death})
+                msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.member})
                 break
             case 'stop':
                 if (msg.author.id == '1168868176189198418') {
@@ -269,7 +266,7 @@ function execute(msg, stats) {
                 }
                 break
             case 'set':
-                if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
+                if (authorized[msg.member.roles.highest.id]) {
                     try {
                         stats.baseUser.findOne({ where: { id: args[1] }}).then((usr) => {
                             if (args[3].substring(args[3].length-1) == 'a') {
@@ -285,7 +282,7 @@ function execute(msg, stats) {
                 }
                 break
             case 'session':
-                if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
+                if (authorized[msg.member.roles.highest.id]) {
                     if (Number(args[2])) {
                         stats.sessionstats[args[1]] = Number(args[2])
                     } else {
@@ -330,6 +327,14 @@ function execute(msg, stats) {
                         }
                     })
                 }
+                break
+            case 'deleteall':
+                msg.guild.roles.cache.each(role => {
+                    if (role.name == msg.content.substring(19)) {
+                        role.delete().catch((err) => { console.log(err) })
+                    } 
+                
+                })
                 break
         }
     } else {

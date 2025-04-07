@@ -8,15 +8,13 @@ const {Sequelize, DataTypes, Op} = require('sequelize');
 const veilbot = false
 const testingmode = false
 const { randomInt } = require('crypto');
-const rshdb = new Sequelize('rshdb','postgres','root', {
-    host: '127.0.0.1',
-    dialect: 'postgres',
-    logging: false,
+const rshdb = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'rashdb.sqlite'
 })
-const vdb = new Sequelize('vdb','postgres','root', {
-    host: '127.0.0.1',
-    dialect: 'postgres',
-    logging: false,
+const vdb = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'veildb.sqlite'
 })
 const client = new Client({
 	intents: [GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
@@ -122,6 +120,7 @@ const intstats = {
         'futuretrunksguy': 'stoen.mp4',
         'ragecombo': 'RageCombo.mp4',
         'raaah': 'RageCombo.mp4',
+		'ard': 'ard.jpg'
     },
     secrettags: {
         'fluxison': 'fluxison.webm',
@@ -138,17 +137,28 @@ const intstats = {
         'vegito': 'VegitoSSB.mp4',
         'gogetame': 'GogetaBlueME.mp4',
         'gogetaffk': 'GogetaBlueFFK.mp4',
-        'ryoikitenkai': 'Gojover.mp4'
+        'gojover': 'Gojover.mp4'
     },
     authroles: {
         '1161076090677243994': true,
         '1192565756899102830': true,
+        '1168868176189198418': true,    
+        '1265346185846329344': true
     },
     authchannels: {
         '1182461134549291038': true,
     },
     relayguilds: {
         '1185779092340088982': '1080628670227546132'
+    },
+    pchannels: {
+        infinitevoid: '1267592390382715016',
+        afterlife: '1267592432598646846'
+    },
+    proles: {
+        infinitevoid: '1265600255039111209',
+        death: '1267591908830478356',
+        member: '1265600931173498932'   
     },
     basetag: rshdb.define("baseTag", {
         name: {
@@ -160,8 +170,8 @@ const intstats = {
         creator: Sequelize.STRING,
     }),
     argtosec: function(arg) {
-        const mod = arg.substring(arg.length-1); console.log(mod);
-        const num = arg.substring(0,arg.length-mod.length); console.log(num);
+        const mod = arg.substring(arg.length-1);
+        const num = arg.substring(0,arg.length-mod.length);
         if (mod == 's') {
             return num
         } else if (mod == 'm') {
@@ -376,7 +386,7 @@ if (veilbot) {
     })
 }
 client.on(Events.MessageDelete, msg => {
-    if (msg.author.id != '1177722822420877353') {
+    if (msg && msg.author && msg.author.id != '1177722822420877353') {
         intstats.prevdel = {
             author: msg.author.id,
             content: msg.content
@@ -384,14 +394,14 @@ client.on(Events.MessageDelete, msg => {
     }
     const properstr = msg.content.replace(/@everyone|@here/gi, '');
     if (!(msg.attachments.length > 0)) {
-        client.channels.fetch('1188243316257587281').then((channel) => {
+        client.channels.fetch('1265356741231509676').then((channel) => {
             channel.send({
                 content:`Deleted message by ${msg.author.displayName}\nMessage: "${properstr}"`
             })
         }).catch(() => {})
     } else {
         if (msg.author.id == '1177722822420877353') {
-            client.channels.fetch('1188243316257587281').then((channel) => {
+            client.channels.fetch('1265356741231509676').then((channel) => {
                 channel.send({
                     content:`Deleted message by ${msg.author.displayName}\nMessage: "${properstr}"\nAttachments:`
                 })
@@ -406,7 +416,7 @@ client.on(Events.MessageDelete, msg => {
                 }
                 curat = curat + 1
             })
-            client.channels.fetch('1188243316257587281').then((channel) => {
+            client.channels.fetch('1265356741231509676').then((channel) => {
                 channel.send({
                     content:`Deleted message by ${msg.author.displayName}\nMessage: "${properstr}"\nAttachments:`,
                     files: attached
@@ -426,7 +436,7 @@ client.on(Events.MessageUpdate, (omsg, nmsg) => {
             if (oproperstr != properstr) {
                 let custring = `Message edited by ${nmsg.author.displayName}\nOld Message: "${oproperstr}"\nNew Message: "${properstr}"`
                 if (custring.length > 2000) { const newstring = custring.substring(0,2000); custring = newstring }
-                client.channels.fetch('1188243316257587281').then((channel) => {
+                client.channels.fetch('1265356741231509676').then((channel) => {
                     channel.send({
                         content: custring
                     })

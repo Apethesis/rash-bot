@@ -10,18 +10,18 @@ function execute(msg, stats) {
     if (msg.author.id == '1168868176189198418' || authlist[msg.member.roles.highest.id]) {
         //msg.removeAttachments()
         msg.suppressEmbeds(true)
-        const ytdlp = spawn('yt-dlp', ['-S','res:480',ticktock,'-o','./ytdltemp.webm'])
+        const ytdlp = spawn('yt-dlp', ['-S','res:480',ticktock,'-o',`./ytdltemp${msg.author.id}.webm`])
         ytdlp.on('error', (err) => {
             console.log(err)
         });
         ytdlp.on('close', code => {
-            msg.reply({ files: [`./ytdltemp.webm`] }).then(() => {
-                fs.rm('./ytdltemp.webm', (err) => {
+            msg.reply({ files: [`./ytdltemp${msg.author.id}.webm`] }).then(() => {
+                fs.rm('./ytdltemp${msg.author.id}.webm', (err) => {
                     console.log(err);
                 })
             }).catch((err) => {
                 console.log(err)
-                fs.rm('./ytdltemp.webm', () => {})
+                fs.rm('./ytdltemp${msg.author.id}.webm', () => {})
             })
         })
     }

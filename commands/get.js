@@ -1,3 +1,4 @@
+const {Sequelize, DataTypes, Op} = require('sequelize');
 function execute(msg, stats) {
     const prevtx = msg.content.substring(4).split("<");
     const num = prevtx[1].lastIndexOf(">");
@@ -36,7 +37,7 @@ function execute(msg, stats) {
         case 'leaderboard':
             stats.baseUser.findAll({ 
                 attributes: ['id'],
-                order: [sequelize.fn('max', sequelize.col('rp'))],
+                order: [Sequelize.fn('max', Sequelize.col('rp'))],
                 limit: 10,
                 group: ['baseUser.id']
             }).then((arr) => {
