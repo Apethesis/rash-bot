@@ -141,7 +141,7 @@ function execute(msg, stats) {
                     }
                 }
                 break
-            case 'lobotomy  ':
+            case 'lobotomy':
                 msg.guild.members.addRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.member})
                 msg.guild.members.removeRole({user: args[1].substring(2,args[1].length-1), role: stats.proles.infinitevoid}).catch(() => {
                     msg.channel.send('Domain Shrunkage failed, either the specified user is too high rank, doesnt exist or is not in domain expansion.')

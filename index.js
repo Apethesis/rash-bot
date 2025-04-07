@@ -8,13 +8,15 @@ const {Sequelize, DataTypes, Op} = require('sequelize');
 const veilbot = false
 const testingmode = false
 const { randomInt } = require('crypto');
-const rshdb = new Sequelize({
-    dialect: 'sqlite',
-    storage: 'rashdb.sqlite'
+const rshdb = new Sequelize('rshdb','postgres','root', {
+    host: '127.0.0.1',
+    dialect: 'postgres',
+    logging: false,
 })
-const vdb = new Sequelize({
-    dialect: 'sqlite',
-    storage: 'veildb.sqlite'
+const vdb = new Sequelize('vdb','postgres','root', {
+    host: '127.0.0.1',
+    dialect: 'postgres',
+    logging: false,
 })
 const client = new Client({
 	intents: [GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
@@ -392,7 +394,7 @@ client.on(Events.MessageDelete, msg => {
             content: msg.content
         }
     }
-    const properstr = msg.content.replace(/@everyone|@here/gi, '');
+    /*const properstr = msg.content.replace(/@everyone|@here/gi, '');
     if (!(msg.attachments.length > 0)) {
         client.channels.fetch('1265356741231509676').then((channel) => {
             channel.send({
@@ -423,7 +425,7 @@ client.on(Events.MessageDelete, msg => {
                 })
             }).catch(() => {})
         }
-    }
+    }*/
 })
 client.on(Events.MessageUpdate, (omsg, nmsg) => {
     if (nmsg.channel.id == '1196363461354070036' && !(nmsg.content == "https://tenor.com/view/toji-toji-fushiguro-jujutsu-kaisen-jujutsu-kaisen-season-2-jjk-gif-14137776531255548484" || nmsg.content == "toji fushigiro")) {
