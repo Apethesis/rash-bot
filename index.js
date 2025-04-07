@@ -154,7 +154,7 @@ const intstats = {
         '1185779092340088982': '1080628670227546132'
     },
     pchannels: {
-        infinitevoid: '1267592390382715016',
+        infinitevoid: '1358911182693601461',
         afterlife: '1267592432598646846'
     },
     proles: {

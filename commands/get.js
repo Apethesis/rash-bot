@@ -51,7 +51,7 @@ function execute(msg, stats) {
             }).catch((err) => { console.log(err); })
             break
         case 'title':
-            if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106') {
+            if (msg.member.roles.highest.id == '1198041664804106250' || msg.member.roles.highest.id == '1198046098703528106' || msg.author.id == '1168868176189198418') {
                 if (args[1] == 'give') {
                     stats.baseUser.findOne({ where: { id: args[2].substring(2,args[2].length-1) }}).then((user) => {
                         if (user) {
